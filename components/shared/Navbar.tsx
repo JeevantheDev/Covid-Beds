@@ -6,10 +6,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import ExitToApp from '@material-ui/icons/ExitToApp';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { signOut } from 'next-auth/client';
 
@@ -52,14 +52,7 @@ export const Navbar = (props: Props) => {
               </Typography>
               {!props.authenticated && (
                 <div>
-                  <IconButton
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    color="inherit"
-                  >
-                    <ExitToApp />
-                  </IconButton>
+                  <Button color="inherit">Login</Button>
                 </div>
               )}
               {props.authenticated && (
