@@ -12,6 +12,7 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { signOut } from 'next-auth/client';
+import Link from 'next/link';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,11 +49,17 @@ export const Navbar = (props: Props) => {
           <Container fixed>
             <Toolbar>
               <Typography className={classes.title} variant="h6">
-                COVID Bed
+                <Link href="/">
+                  <a>COVID Bed</a>
+                </Link>
               </Typography>
               {!props.authenticated && (
                 <div>
-                  <Button color="inherit">Login</Button>
+                  <Link href="/auth/signin">
+                    <Button color="inherit">
+                      <a>Sign in</a>
+                    </Button>
+                  </Link>
                 </div>
               )}
               {props.authenticated && (

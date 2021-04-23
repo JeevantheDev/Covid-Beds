@@ -16,7 +16,6 @@
         "eslint-plugin-import"
     ],
     "rules": {
-        "import/no-default-export": "error",
         "prettier/prettier": [
         "error",
             {
