@@ -8,10 +8,22 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const options = {
+  pages: {
+    signIn: '/auth/signin',
+    error: '/auth/error',
+  },
   providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+    }),
+    Providers.Google({
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+    }),
+    Providers.Facebook({
+      clientId: process.env.APP_ID,
+      clientSecret: process.env.APP_SECRET,
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
