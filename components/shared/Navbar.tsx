@@ -88,7 +88,11 @@ export const Navbar = (props: Props) => {
                     open={open}
                     onClose={handleClose}
                   >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <Link href="/auth/profile">
+                      <MenuItem>
+                        <a>Profile</a>
+                      </MenuItem>
+                    </Link>
                     <MenuItem onClick={() => signOut()}>Logout</MenuItem>
                   </Menu>
                 </div>

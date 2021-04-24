@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
-import { loadCSS } from 'fg-loadcss';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -35,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
         height: '100%',
       },
       padding: theme.spacing(3),
+      backgroundColor: theme.palette.secondary.light,
     },
     loginGridBox: {
       display: 'flex',
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
       objectFit: 'cover',
     },
     loginCardText: {
+      backgroundColor: theme.palette.secondary.light,
       width: '100%',
       height: theme.spacing(46),
     },
@@ -70,17 +71,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SignIn({ providers }: { providers: ProviderTypes }) {
   const classes = useStyles();
   const [session, loading] = useSession();
-
-  React.useEffect(() => {
-    const node = loadCSS(
-      'https://use.fontawesome.com/releases/v5.12.0/css/all.css',
-      document.querySelector('#font-awesome-css')
-    );
-
-    return () => {
-      node.parentNode!.removeChild(node);
-    };
-  }, []);
 
   if (loading) {
     return <div>Loading...</div>;

@@ -35,6 +35,7 @@ class MyDocument extends Document {
                 font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
                 font-size: 1rem;
                 margin: 0;
+                background-color: #f4f4f4;
               }
             `}
           </style>

@@ -3,6 +3,7 @@ import React from 'react';
 import { MainLayout } from '../components/MainLayout/MainLayout';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Image from 'next/image';
 import Typography from '@material-ui/core/Typography';
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       color: theme.palette.text.secondary,
       textAlign: 'center',
+      backgroundColor: theme.palette.secondary.light,
     },
   })
 );
@@ -51,13 +53,13 @@ export default function Home() {
           </Grid>
           <Grid item xs={12} md={6} sm={6}>
             <Paper elevation={0} className={classes.paper}>
-              <Paper elevation={0}>
+              <Box>
                 <Typography variant="h3" color="primary" gutterBottom>
                   Find a Covid Hospital
                 </Typography>
                 <span style={{ fontWeight: 'lighter', fontSize: '20px' }}>Search by Your Location</span>
-              </Paper>
-              <Paper elevation={0}>
+              </Box>
+              <Box elevation={0}>
                 <div
                   className={classes.margin}
                   style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
@@ -74,7 +76,7 @@ export default function Home() {
                     Search
                   </Button>
                 </div>
-              </Paper>
+              </Box>
             </Paper>
           </Grid>
         </Grid>

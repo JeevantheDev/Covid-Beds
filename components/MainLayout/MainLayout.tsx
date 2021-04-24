@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { loadCSS } from 'fg-loadcss';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useSession } from 'next-auth/client';
 import { Navbar } from '../shared/Navbar';
@@ -23,6 +25,17 @@ interface Iprops {
 export const MainLayout: React.FC<Iprops> = ({ children }) => {
   const classes = useStyles();
   const [session] = useSession();
+
+  useEffect(() => {
+    const node = loadCSS(
+      'https://use.fontawesome.com/releases/v5.12.0/css/all.css',
+      document.querySelector('#font-awesome-css')
+    );
+
+    return () => {
+      node.parentNode!.removeChild(node);
+    };
+  }, []);
 
   const [authUser, setAuthUser] = useState<IauthUser>({
     email: '',
