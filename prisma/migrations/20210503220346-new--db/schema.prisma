@@ -14,12 +14,11 @@ model Hospital {
   nameHospital              String            
   locationType              String            
   locationCoordinates       String           
-  locationFormattedAddress  String            
-  locationStreet            String            
+  locationFormattedAddress  String
   locationCity              String            
   locationState             String            
   locationZipcode           String            
-  locationCountryCode       String            
+  locationCountryCode           String            
   hospitalType              String            
   hospiatlEmail             String   @unique 
   hospitalContactNo         String               
@@ -33,6 +32,7 @@ model HospitalBeds {
   hospital                  Hospital?         @relation(fields: [hospitalId], references: [id])
   hospitalId                Int?             
   totalBeds                 Int          
+  currentBeds               Int          
 }
 
 model Account {

@@ -59,7 +59,7 @@ export default function Home() {
                 </Typography>
                 <span style={{ fontWeight: 'lighter', fontSize: '20px' }}>Search by Your Location</span>
               </Box>
-              <Box elevation={0}>
+              <Box>
                 <div
                   className={classes.margin}
                   style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}

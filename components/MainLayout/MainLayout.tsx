@@ -56,7 +56,7 @@ export const MainLayout: React.FC<Iprops> = ({ children }) => {
   return (
     <div id="root">
       <Navbar authenticated={authUser.authenticated} />
-      <Container fixed>
+      <Container maxWidth="lg">
         <div className={classes.root} id="react-children">
           {children}
         </div>

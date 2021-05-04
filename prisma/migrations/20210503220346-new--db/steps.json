@@ -154,13 +154,6 @@
     {
       "tag": "CreateField",
       "model": "Hospital",
-      "field": "locationStreet",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Hospital",
       "field": "locationCity",
       "type": "String",
       "arity": "Required"
@@ -393,6 +386,13 @@
       "tag": "CreateField",
       "model": "HospitalBeds",
       "field": "totalBeds",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "HospitalBeds",
+      "field": "currentBeds",
       "type": "Int",
       "arity": "Required"
     },

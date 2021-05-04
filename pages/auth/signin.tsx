@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       width: theme.spacing(100),
       height: theme.spacing(45),
-      '@media(max-width: 568px)': {
+      [theme.breakpoints.down('sm')]: {
         height: '100%',
       },
       padding: theme.spacing(3),
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
     loginCardImg: {
       width: '100%',
       height: theme.spacing(40),
-      '@media(max-width: 568px)': {
+      [theme.breakpoints.down('sm')]: {
         display: 'none',
       },
     },
