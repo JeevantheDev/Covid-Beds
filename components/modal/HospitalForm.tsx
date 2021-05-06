@@ -168,7 +168,7 @@ export const HospitalForm: React.FC<Iprops> = ({ initialFormData, open, handleCl
                       handleSubmit();
                     }}
                   >
-                    Submit
+                    {!isSubmitting ? 'Submit' : 'Submitting...'}
                   </Button>
                 </form>
               )}

@@ -83,7 +83,7 @@ export const HospitalBedsForm: React.FC<Iprops> = ({
               onSubmit={handleSubmitFormData}
             >
               {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
-                <form className={classes.formContainer} noValidate autoComplete="off">
+                <form className={classes.formContainer}>
                   <Grid container spacing={3}>
                     <Grid item md={12} xs={12}>
                       <TextField
@@ -140,7 +140,7 @@ export const HospitalBedsForm: React.FC<Iprops> = ({
                       handleSubmit();
                     }}
                   >
-                    Submit
+                    {!isSubmitting ? 'Submit' : 'Submitting...'}
                   </Button>
                 </form>
               )}

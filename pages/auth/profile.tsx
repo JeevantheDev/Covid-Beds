@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const profile = ({ session }) => {
   const classes = useStyles();
-  const { data, loading } = useRequest(session && { url: `/api/user/${session.user.email}` }, null);
+  const { data, loading, mutate } = useRequest(session && { url: `/api/user/${session.user.email}` }, null);
   return (
     <MainLayout>
       <div className={classes.root}>
         <Grid container spacing={2}>
           <AccountDetails loading={loading} userDetails={data} />
-          <HospitalDetails loading={loading} userDetails={data} />
+          <HospitalDetails mutate={mutate} loading={loading} userDetails={data} />
         </Grid>
       </div>
     </MainLayout>

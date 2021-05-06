@@ -5,10 +5,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const prisma = new PrismaClient();
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
+  if (req.method === 'PUT') {
     const { body } = req;
-    const createdHospital = await prisma.hospital.create({
-      include: { user: true },
+    const { hospitalid } = req.query;
+    const updatedHospital = await prisma.hospital.update({
+      where: { id: Number(hospitalid) },
       data: {
         nameHospital: body.nameHospital,
         locationType: body.locationType,
@@ -20,15 +21,19 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
         locationCountryCode: body.locationCountryCode,
         hospitalType: body.hospitalType,
         hospiatlEmail: body.hospitalEmail,
-        hospitalContactNo: body.hospitalContactNo.toString(),
+        hospitalContactNo: body.hospitalContactNo,
         hospitalImage: body.hospitalImage,
-        user: {
-          connect: {
-            id: body.userId,
-          },
-        },
       },
     });
-    return res.status(200).json({ status: 'success', message: 'Hospital created Successfully', createdHospital });
+    return res.status(200).json({ status: 'success', message: 'Hospital updated Successfully', updatedHospital });
+  }
+  if (req.method === 'DELETE') {
+    const { hospitalid } = req.query;
+    const deletedHospital = await prisma.hospital.delete({
+      where: {
+        id: Number(hospitalid),
+      },
+    });
+    return res.status(200).json({ status: 'success', message: 'Hospital deleted Successfully', deletedHospital });
   }
 }

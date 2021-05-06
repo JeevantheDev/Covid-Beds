@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import axios from 'axios';
 
 export default function useRequest(request, initialData = {}) {
-  const { data, error } = useSWR(
+  const { data, error, ...rest } = useSWR(
     request && JSON.stringify(request),
     () =>
       axios(request || {}).then((response) => {
@@ -26,6 +26,7 @@ export default function useRequest(request, initialData = {}) {
     data,
     error,
     loading: !data && !error,
+    ...rest,
   };
 }
 
