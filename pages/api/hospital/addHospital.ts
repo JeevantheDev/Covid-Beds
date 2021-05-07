@@ -2,6 +2,7 @@
 
 import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { HOSPITAL_DEFAULT } from '../../../src/entity/constant';
 const prisma = new PrismaClient();
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
@@ -21,7 +22,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
         hospitalType: body.hospitalType,
         hospiatlEmail: body.hospitalEmail,
         hospitalContactNo: body.hospitalContactNo.toString(),
-        hospitalImage: body.hospitalImage,
+        hospitalImage: HOSPITAL_DEFAULT.IMAGE,
         user: {
           connect: {
             id: body.userId,

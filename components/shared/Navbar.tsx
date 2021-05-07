@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { signOut } from 'next-auth/client';
@@ -53,50 +55,60 @@ export const Navbar = (props: Props) => {
                   <a>COVID Bed</a>
                 </Link>
               </Typography>
-              {!props.authenticated && (
+              <Box display="flex" justifyContent="center" alignItems="center">
+                {!props.authenticated && (
+                  <div>
+                    <Link href="/auth/signin">
+                      <Button color="inherit">
+                        <a>Sign in</a>
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+                {props.authenticated && (
+                  <div>
+                    <IconButton
+                      aria-label="account of current user"
+                      aria-controls="menu-appbar"
+                      aria-haspopup="true"
+                      onClick={handleMenu}
+                      color="inherit"
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                    <Menu
+                      id="menu-appbar"
+                      anchorEl={anchorEl}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={open}
+                      onClose={handleClose}
+                    >
+                      <Link href="/auth/profile">
+                        <MenuItem>
+                          <a>Profile</a>
+                        </MenuItem>
+                      </Link>
+                      <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+                    </Menu>
+                  </div>
+                )}
+                <Divider orientation="vertical" flexItem />
                 <div>
-                  <Link href="/auth/signin">
+                  <Link href="/hospitals">
                     <Button color="inherit">
-                      <a>Sign in</a>
+                      <a>Browse</a>
                     </Button>
                   </Link>
                 </div>
-              )}
-              {props.authenticated && (
-                <div>
-                  <IconButton
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleMenu}
-                    color="inherit"
-                  >
-                    <AccountCircle />
-                  </IconButton>
-                  <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={open}
-                    onClose={handleClose}
-                  >
-                    <Link href="/auth/profile">
-                      <MenuItem>
-                        <a>Profile</a>
-                      </MenuItem>
-                    </Link>
-                    <MenuItem onClick={() => signOut()}>Logout</MenuItem>
-                  </Menu>
-                </div>
-              )}
+              </Box>
             </Toolbar>
           </Container>
         </AppBar>

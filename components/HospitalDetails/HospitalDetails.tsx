@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import Image from 'next/image';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -59,8 +60,6 @@ const useStyles = makeStyles((theme: Theme) =>
       placeItems: 'center',
     },
     cardHospitalImg: {
-      width: '70%',
-      height: '80%',
       objectFit: 'cover',
       borderRadius: '50%',
       border: '5px solid #333',
@@ -224,7 +223,6 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
         hospitalType: values.hospitalType,
         hospitalEmail: values.hospitalEmail,
         hospitalContactNo: values.hospitalContactNo,
-        hospitalImage: HOSPITAL_DEFAULT.IMAGE,
       };
       if (!editFlag) {
         await createHospital(formData).then(({ createdHospital, status }) => {
@@ -287,7 +285,17 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
     const formData: FormData = new FormData();
     formData.append('hospitalImage', imageFile, imageFile.name);
     await uploadImage(formData).then(({ path }) => {
-      console.log(path);
+      const formData: IcreateHospital = {
+        id: userDetails.Hospital[0].id,
+        hospitalImage: path,
+      };
+      updateHospital(formData).then(({ status }) => {
+        if (status === 'success') {
+          handleClose();
+        }
+        mutate();
+        setImageFile(null);
+      });
     });
   };
 
@@ -481,7 +489,12 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
         <Paper className={classes.cardHospital} variant="outlined">
           {userDetails && !loading && (
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              <img src={userDetails.Hospital[0].hospitalImage} className={classes.cardHospitalImg} />
+              <Image
+                src={`/uploads/${userDetails.Hospital[0].hospitalImage.split('public/uploads/')[1]}`}
+                width="155"
+                height="155"
+                className={classes.cardHospitalImg}
+              />
               <input
                 onChange={handleChangeImage}
                 accept="image/*"
@@ -500,6 +513,7 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
                     e.preventDefault();
                     handleUpload();
                   }}
+                  size="small"
                   variant="contained"
                   color="secondary"
                 >

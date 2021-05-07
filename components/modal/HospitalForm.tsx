@@ -60,7 +60,7 @@ export const HospitalForm: React.FC<Iprops> = ({ initialFormData, open, handleCl
     <div>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <MuiDialogTitle disableTypography className={classes.root}>
-          <Typography variant="h6">Add Hospital</Typography>
+          <Typography variant="h6">Hospital</Typography>
           <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
             <CloseIcon />
           </IconButton>

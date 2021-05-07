@@ -45,5 +45,5 @@ export enum HOSPITAL_TYPE {
 
 export enum HOSPITAL_DEFAULT {
   POINT = 'Point',
-  IMAGE = 'https://firebasestorage.googleapis.com/v0/b/blog-spot-e4923.appspot.com/o/images%2Fdownload.jfif?alt=media&token=86d1d01e-663e-4a64-b394-aa9a542163ad',
+  IMAGE = 'public/uploads/defualt.png',
 }

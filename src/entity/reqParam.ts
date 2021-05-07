@@ -14,19 +14,19 @@ export interface IcreateHospital {
   HospitalBeds?: IcreateHospitalBeds[];
   createdAt?: string;
   updatedAt?: string;
-  nameHospital: string;
-  locationType: string;
-  locationCoordinates: string[];
-  locationAddress: string;
-  locationFormattedAddress: string;
-  locationCity: string;
-  locationState: string;
-  locationZipcode: string;
-  locationCountryCode: string;
-  hospitalType: string;
-  hospitalEmail: string;
-  hospitalContactNo: string;
-  hospitalImage: string;
+  nameHospital?: string;
+  locationType?: string;
+  locationCoordinates?: string[];
+  locationAddress?: string;
+  locationFormattedAddress?: string;
+  locationCity?: string;
+  locationState?: string;
+  locationZipcode?: string;
+  locationCountryCode?: string;
+  hospitalType?: string;
+  hospitalEmail?: string;
+  hospitalContactNo?: string;
+  hospitalImage?: string;
 }
 
 export interface IcreateHospitalBedsInitial {

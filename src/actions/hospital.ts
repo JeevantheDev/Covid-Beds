@@ -6,9 +6,7 @@ import { useApiHandler } from '.'; //index page
 
 const config = {
   headers: { 'content-type': 'multipart/form-data' },
-  onUploadProgress: (event) => {
-    console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
-  },
+  onUploadProgress: (event) => Math.round((event.loaded * 100) / event.total),
 };
 
 export const uploadImage = async (imageFile: any) => {
