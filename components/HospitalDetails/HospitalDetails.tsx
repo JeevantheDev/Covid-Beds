@@ -490,6 +490,8 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
           {userDetails && !loading && (
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
               <Image
+                loading="eager"
+                objectFit="cover"
                 src={`/uploads/${userDetails.Hospital[0].hospitalImage.split('public/uploads/')[1]}`}
                 width="155"
                 height="155"

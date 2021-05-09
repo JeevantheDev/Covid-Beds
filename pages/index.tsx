@@ -48,7 +48,7 @@ export default function Home() {
         <Grid container spacing={1}>
           <Grid item xs={12} md={6} sm={6}>
             <Paper elevation={0} className={classes.paper}>
-              <Image src="/landing.svg" alt="landing" width="1000" height="1000" />
+              <Image loading="eager" objectFit="contain" src="/landing.svg" alt="landing" width="1000" height="1000" />
             </Paper>
           </Grid>
           <Grid item xs={12} md={6} sm={6}>

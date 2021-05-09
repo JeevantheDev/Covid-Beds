@@ -3,14 +3,11 @@ import React from 'react';
 import { MainLayout } from '../components/MainLayout/MainLayout';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Image from 'next/image';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
 import useRequest from '../src/actions/index';
+import { IcreateHospital } from '../src/entity/reqParam';
+import { HospitalCard } from '../components/HospitalCard/HospitalCard';
+import { HospitalFilter } from '../components/HospitalFilter/HospitalFilter';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,37 +16,48 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(3),
       marginBottom: theme.spacing(3),
     },
-    margin: {
-      margin: theme.spacing(1.5),
-    },
-    button: {
-      marginTop: theme.spacing(2),
-    },
-    paper: {
+    hospitalListContainer: {
+      margin: theme.spacing(0.5),
       width: '100%',
-      height: '90%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-      padding: theme.spacing(2),
-      color: theme.palette.text.secondary,
-      textAlign: 'center',
-      backgroundColor: theme.palette.secondary.light,
+      // padding: theme.spacing(4),
+      [(theme.breakpoints.down('sm'), theme.breakpoints.down('md'))]: {
+        height: '100%',
+      },
+    },
+    gridContainer: {
+      margin: theme.spacing(0.5),
+      // padding: theme.spacing(4),
+      width: '100%',
+      height: theme.spacing(50),
     },
   })
 );
 
 export default function Hospitals() {
   const classes = useStyles();
-  const { data, loading } = useRequest({ url: `/api/hospital/allHospitals` }, null);
-  if (!loading) {
-    console.log(data);
-  }
+  const { data: hospitalDetails, loading } = useRequest({ url: `/api/hospital/allHospitals` }, null);
+
   return (
     <MainLayout>
       <div className={classes.root}>
-        <h1>All Hospitals</h1>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={12} sm={12}>
+            <Paper className={classes.gridContainer} variant="outlined" square />
+          </Grid>
+          <Grid item xs={12} md={4} sm={12}>
+            <Grid container spacing={4}>
+              <HospitalFilter />
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={8} sm={12}>
+            <Grid container spacing={4}>
+              {!loading &&
+                hospitalDetails.map((hospital: IcreateHospital) => {
+                  return <HospitalCard key={hospital.id} hospitalDetail={hospital} />;
+                })}
+            </Grid>
+          </Grid>
+        </Grid>
       </div>
     </MainLayout>
   );
