@@ -12,11 +12,11 @@ export interface IcreateHospital {
   id?: number;
   userId?: number;
   HospitalBeds?: IcreateHospitalBeds[];
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
   nameHospital?: string;
   locationType?: string;
-  locationCoordinates?: string[];
+  locationCoordinates?: string | string[];
   locationAddress?: string;
   locationFormattedAddress?: string;
   locationCity?: string;
@@ -41,4 +41,6 @@ export interface IcreateHospitalBeds {
   hospitalId?: number;
   totalBeds: number;
   currentBeds: number;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }

@@ -20,9 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Iprops {
   children?: React.ReactElement;
+  isContainer?: boolean;
 }
 
-export const MainLayout: React.FC<Iprops> = ({ children }) => {
+export const MainLayout: React.FC<Iprops> = ({ children, isContainer }) => {
   const classes = useStyles();
   const [session] = useSession();
 
@@ -56,11 +57,14 @@ export const MainLayout: React.FC<Iprops> = ({ children }) => {
   return (
     <div id="root">
       <Navbar authenticated={authUser.authenticated} />
-      <Container maxWidth="lg">
-        <div className={classes.root} id="react-children">
-          {children}
-        </div>
-      </Container>
+      {isContainer && (
+        <Container maxWidth="lg">
+          <div className={classes.root} id="react-children">
+            {children}
+          </div>
+        </Container>
+      )}
+      {!isContainer && <div id="react-children">{children}</div>}
     </div>
   );
 };

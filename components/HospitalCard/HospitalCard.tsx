@@ -70,12 +70,12 @@ export const HospitalCard: React.FC<Iprops> = ({ hospitalDetail }) => {
     <Grid item xs={12} md={12} sm={6}>
       <Paper className={classes.gridContainer} variant="outlined">
         <Box className={classes.columnFlexProperty} display="flex" justifyContent="space-between" alignItems="center">
-          <Box style={{ width: '80%' }} flex="0.5">
+          <Box style={{ width: '80%' }} flex="0.6">
             <Image
               className={classes.imageMobileScreen}
               loading="eager"
               objectFit="cover"
-              width="160"
+              width="200"
               height="175"
               src={`/uploads/${hospitalDetail.hospitalImage.split('public/uploads/')[1]}`}
             />
@@ -97,7 +97,7 @@ export const HospitalCard: React.FC<Iprops> = ({ hospitalDetail }) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Link href="#">
+              <Link href={`/hospital/${hospitalDetail.id}`}>
                 <a>
                   <Typography className={classes.hospitalName} variant="h5" color="primary">
                     {hospitalDetail.nameHospital}

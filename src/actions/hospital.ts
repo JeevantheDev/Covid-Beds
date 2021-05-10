@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { IcreateHospital, IcreateHospitalBeds } from 'src/entity/reqParam';
 import axios from 'axios';
-import { useApiHandler } from '.'; //index page
+import { useApiHandler } from '.';
 
 const config = {
   headers: { 'content-type': 'multipart/form-data' },
@@ -12,6 +12,7 @@ const config = {
 export const uploadImage = async (imageFile: any) => {
   return await axios.post('/api/hospital/imageUpload', imageFile, config);
 };
+
 export const createHospital = async (reqBody: IcreateHospital) => {
   return await axios.post('/api/hospital/addHospital', reqBody);
 };

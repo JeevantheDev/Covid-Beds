@@ -35,10 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Hospitals() {
   const classes = useStyles();
-  const { data: hospitalDetails, loading } = useRequest({ url: `/api/hospital/allHospitals` }, null);
-
+  const { data, loading } = useRequest({ url: `/api/hospital/allHospitals` }, null);
   return (
-    <MainLayout>
+    <MainLayout isContainer>
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} sm={12}>
@@ -52,7 +51,7 @@ export default function Hospitals() {
           <Grid item xs={12} md={8} sm={12}>
             <Grid container spacing={4}>
               {!loading &&
-                hospitalDetails.map((hospital: IcreateHospital) => {
+                data.allHospitals.map((hospital: IcreateHospital) => {
                   return <HospitalCard key={hospital.id} hospitalDetail={hospital} />;
                 })}
             </Grid>

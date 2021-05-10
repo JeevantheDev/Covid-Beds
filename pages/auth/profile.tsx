@@ -24,7 +24,7 @@ const profile = ({ session }) => {
   const classes = useStyles();
   const { data, loading, mutate } = useRequest(session && { url: `/api/user/${session.user.email}` }, null);
   return (
-    <MainLayout>
+    <MainLayout isContainer>
       <div className={classes.root}>
         <Grid container spacing={2}>
           <AccountDetails loading={loading} userDetails={data} />

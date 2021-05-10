@@ -43,7 +43,7 @@ export default function Home() {
   const classes = useStyles();
 
   return (
-    <MainLayout>
+    <MainLayout isContainer>
       <div className={classes.root}>
         <Grid container spacing={1}>
           <Grid item xs={12} md={6} sm={6}>

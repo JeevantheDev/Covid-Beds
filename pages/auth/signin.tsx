@@ -80,7 +80,7 @@ export default function SignIn({ providers }: { providers: ProviderTypes }) {
     return <Redirect to="/" />;
   } else {
     return (
-      <MainLayout>
+      <MainLayout isContainer>
         <>
           <div className={classes.root}>
             <Paper className={classes.loginContainer} elevation={0}>

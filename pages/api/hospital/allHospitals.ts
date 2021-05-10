@@ -6,9 +6,9 @@ const prisma = new PrismaClient();
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    const response = await prisma.hospital.findMany({
+    const allHospitals = await prisma.hospital.findMany({
       include: { HospitalBeds: true },
     });
-    return res.status(200).json(response);
+    return res.status(200).json({ allHospitals });
   }
 }
