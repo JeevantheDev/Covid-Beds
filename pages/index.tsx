@@ -66,10 +66,10 @@ export default function Home() {
                 >
                   <Grid container spacing={2}>
                     <Grid item xs={12} md={6} sm={6}>
-                      <TextField fullWidth label="Enter your Country" id="outlined-basic" variant="outlined" />
+                      <TextField fullWidth placeholder="Enter your country" id="outlined-basic" variant="outlined" />
                     </Grid>
                     <Grid item xs={12} md={6} sm={6}>
-                      <TextField fullWidth label="Enter your ZipCode" id="outlined-basic" variant="outlined" />
+                      <TextField fullWidth placeholder="Enter your zipcode" id="outlined-basic" variant="outlined" />
                     </Grid>
                   </Grid>
                   <Button className={classes.button} variant="contained" color="secondary" startIcon={<SearchIcon />}>

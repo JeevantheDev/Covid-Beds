@@ -39,6 +39,7 @@
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.9",
     "react-geocode": "^0.2.3",
+    "react-share": "^4.4.0",
     "react-test-renderer": "^16.13.1",
     "swr": "^0.3.9",
     "yup": "^0.32.9"
