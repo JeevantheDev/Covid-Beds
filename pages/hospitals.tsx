@@ -8,6 +8,7 @@ import useRequest from '../src/actions/index';
 import { IcreateHospital } from '../src/entity/reqParam';
 import { HospitalCard } from '../components/HospitalCard/HospitalCard';
 import { HospitalFilter } from '../components/HospitalFilter/HospitalFilter';
+import { HospitalMapBox } from '../components/HospitalMapBox/HospitalMapBox';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +42,9 @@ export default function Hospitals() {
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} sm={12}>
-            <Paper className={classes.gridContainer} variant="outlined" square />
+            <Paper className={classes.gridContainer} variant="outlined" square>
+              {!loading && <HospitalMapBox hospitalDatas={data.allHospitals} />}
+            </Paper>
           </Grid>
           <Grid item xs={12} md={4} sm={12}>
             <Grid container spacing={4}>

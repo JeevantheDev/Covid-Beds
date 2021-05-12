@@ -2,12 +2,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import { useState } from 'react';
-import { Container, Typography } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { MainLayout } from '../../components/MainLayout/MainLayout';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
 import { IcreateHospital } from '../../src/entity/reqParam';
 import { GetServerSideProps } from 'next';
 import { PrismaClient } from '@prisma/client';
@@ -23,11 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
       marginBottom: theme.spacing(3),
-    },
-    gridContainer: {
-      margin: theme.spacing(0.5),
-      width: '100%',
-      height: theme.spacing(50),
     },
   })
 );

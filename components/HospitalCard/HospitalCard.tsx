@@ -97,25 +97,35 @@ export const HospitalCard: React.FC<Iprops> = ({ hospitalDetail }) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Link href={`/hospital/${hospitalDetail.id}`}>
-                <a>
-                  <Typography className={classes.hospitalName} variant="h5" color="primary">
-                    {hospitalDetail.nameHospital}
-                  </Typography>
-                </a>
-              </Link>
+              {hospitalDetail.HospitalBeds.length > 0 && (
+                <Link href={`/hospital/${hospitalDetail.id}`}>
+                  <a>
+                    <Typography className={classes.hospitalName} variant="h5" color="primary">
+                      {hospitalDetail.nameHospital}
+                    </Typography>
+                  </a>
+                </Link>
+              )}
+              {hospitalDetail.HospitalBeds.length === 0 && (
+                <Typography className={classes.hospitalName} variant="h5" color="primary">
+                  {hospitalDetail.nameHospital}
+                </Typography>
+              )}
               <span className={classes.chip}>{hospitalDetail.hospitalType}</span>
             </Box>
             <span className={classes.customChip}>
               {`${hospitalDetail.locationState},${hospitalDetail.locationCountryCode}`}
             </span>
             <Box display="flex" className={classes.columnFlexProperty} style={{ width: '100%', paddingTop: '10px' }}>
-              <Typography variant="h6">
-                Beds available{' '}
-                <Typography style={{ fontWeight: 'bold' }} color="secondary" component="span" variant="h5">
-                  {hospitalDetail.HospitalBeds[0].totalBeds} / {hospitalDetail.HospitalBeds[0].currentBeds}
+              {hospitalDetail.HospitalBeds.length > 0 && (
+                <Typography variant="h6">
+                  Beds available{' '}
+                  <Typography style={{ fontWeight: 'bold' }} color="secondary" component="span" variant="h5">
+                    {hospitalDetail.HospitalBeds[0].totalBeds} / {hospitalDetail.HospitalBeds[0].currentBeds}
+                  </Typography>
                 </Typography>
-              </Typography>
+              )}
+              {hospitalDetail.HospitalBeds.length === 0 && <Typography variant="h6">Beds not available </Typography>}
             </Box>
           </Box>
         </Box>

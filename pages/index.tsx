@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
 import { MainLayout } from '../components/MainLayout/MainLayout';
@@ -10,6 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
+import MicroFrontend from '../components/MicroFrontend/MicroFrontend';
+
+const { REACT_APP_COVID_TRACKER_HOST: covidTrackerHost } = process.env;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,10 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     paper: {
       width: '100%',
-      height: '90%',
+      height: '90vh',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'flex-end',
+      justifyContent: 'space-between',
       alignItems: 'center',
       padding: theme.spacing(2),
       color: theme.palette.text.secondary,
@@ -38,6 +42,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+function CovidTracker() {
+  return <MicroFrontend host={covidTrackerHost} name="CovidTracker" />;
+}
 
 export default function Home() {
   const classes = useStyles();
@@ -53,29 +61,34 @@ export default function Home() {
           </Grid>
           <Grid item xs={12} md={6} sm={6}>
             <Paper elevation={0} className={classes.paper}>
-              <Box>
-                <Typography variant="h3" color="primary" gutterBottom>
-                  Find a Covid Hospital
-                </Typography>
-                <span style={{ fontWeight: 'lighter', fontSize: '20px' }}>Search by Your Location</span>
+              <Box mb={2} style={{ width: '100%', height: '100%', backgroundColor: '#333', color: 'white' }}>
+                <CovidTracker />
               </Box>
               <Box>
-                <div
-                  className={classes.margin}
-                  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
-                >
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} md={6} sm={6}>
-                      <TextField fullWidth placeholder="Enter your country" id="outlined-basic" variant="outlined" />
+                <Box>
+                  <Typography variant="h3" color="primary" gutterBottom>
+                    Find a Covid Hospital
+                  </Typography>
+                  <span style={{ fontWeight: 'lighter', fontSize: '20px' }}>Search by Your Location</span>
+                </Box>
+                <Box>
+                  <div
+                    className={classes.margin}
+                    style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+                  >
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} md={6} sm={6}>
+                        <TextField fullWidth placeholder="Enter your country" id="outlined-basic" variant="outlined" />
+                      </Grid>
+                      <Grid item xs={12} md={6} sm={6}>
+                        <TextField fullWidth placeholder="Enter your zipcode" id="outlined-basic" variant="outlined" />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} md={6} sm={6}>
-                      <TextField fullWidth placeholder="Enter your zipcode" id="outlined-basic" variant="outlined" />
-                    </Grid>
-                  </Grid>
-                  <Button className={classes.button} variant="contained" color="secondary" startIcon={<SearchIcon />}>
-                    Search
-                  </Button>
-                </div>
+                    <Button className={classes.button} variant="contained" color="secondary" startIcon={<SearchIcon />}>
+                      Search
+                    </Button>
+                  </div>
+                </Box>
               </Box>
             </Paper>
           </Grid>

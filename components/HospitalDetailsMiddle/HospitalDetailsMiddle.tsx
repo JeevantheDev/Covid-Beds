@@ -25,7 +25,7 @@ export const HospitalDetailsMiddle = ({ hospitalBeds }: Props) => {
           >
             Beds available:
           </Typography>
-          <Divider style={{ width: '70%' }} />
+          <Divider style={{ width: '100%' }} />
           <Typography variant="h1" component="h2" color="secondary">
             {hospitalBeds.totalBeds} / {hospitalBeds.currentBeds}
           </Typography>

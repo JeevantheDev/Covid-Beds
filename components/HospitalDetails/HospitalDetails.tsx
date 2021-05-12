@@ -487,7 +487,7 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
       </Grid>
       <Grid item xs={12} md={3} sm={6}>
         <Paper className={classes.cardHospital} variant="outlined">
-          {userDetails && !loading && (
+          {userDetails && userDetails.Hospital.length > 0 && !loading && (
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
               <Image
                 loading="eager"
