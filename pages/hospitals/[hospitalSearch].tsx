@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { MainLayout } from '../../components/MainLayout/MainLayout';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +9,7 @@ import { IcreateHospital } from '../../src/entity/reqParam';
 import { HospitalCard } from '../../components/HospitalCard/HospitalCard';
 import { HospitalFilter } from '../../components/HospitalFilter/HospitalFilter';
 import { HospitalMapBox } from '../../components/HospitalMapBox/HospitalMapBox';
+import { PaginationDynamic } from '../../components/PaginationDynamic/PaginationDynamic';
 import { Container } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
@@ -22,14 +23,15 @@ const useStyles = makeStyles((theme: Theme) =>
     hospitalListContainer: {
       margin: theme.spacing(0.5),
       width: '100%',
-      // padding: theme.spacing(4),
       [(theme.breakpoints.down('sm'), theme.breakpoints.down('md'))]: {
         height: '100%',
       },
     },
     mapContainer: {
-      // padding: theme.spacing(4),
       height: theme.spacing(50),
+      [(theme.breakpoints.down('sm'), theme.breakpoints.down('md'))]: {
+        height: theme.spacing(25),
+      },
     },
     gridContainer: {
       marginTop: theme.spacing(2),
@@ -44,7 +46,11 @@ export default function Hospitals() {
   const classes = useStyles();
   const router = useRouter();
   const { hospitalSearch } = router.query;
-  const { data, loading } = useRequest({ url: `/api/hospital/${hospitalSearch}` }, null);
+  const [page, setPage] = useState(0);
+  const { data, loading } = useRequest({ url: `/api/hospital/${hospitalSearch}/${page}` }, null);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
   return (
     <MainLayout>
       <div className={classes.root}>
@@ -60,10 +66,15 @@ export default function Hospitals() {
             </Grid>
             <Grid item xs={12} md={8} sm={12}>
               <Grid container spacing={4}>
-                {!loading &&
-                  data.allHospitals.map((hospital: IcreateHospital) => {
-                    return <HospitalCard key={hospital.id} hospitalDetail={hospital} />;
-                  })}
+                <>
+                  {!loading &&
+                    data.allHospitals.map((hospital: IcreateHospital) => {
+                      return <HospitalCard key={hospital.id} hospitalDetail={hospital} />;
+                    })}
+                  {!loading && data.count > 5 && (
+                    <PaginationDynamic handleChange={handleChange} count={Math.round(data.count / 2)} />
+                  )}
+                </>
               </Grid>
             </Grid>
           </Grid>

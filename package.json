@@ -37,6 +37,7 @@
     "next-auth": "^3.1.0",
     "node-geocoder": "^3.27.0",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.6.0",
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.9",
     "react-geocode": "^0.2.3",
@@ -50,6 +51,8 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@iconify-icons/simple-icons": "^1.1.24",
+    "@iconify/react": "^1.1.4",
     "@prisma/cli": "^2.1.1",
     "@prisma/client": "^2.1.1",
     "@testing-library/dom": "^7.30.4",

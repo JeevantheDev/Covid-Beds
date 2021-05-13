@@ -45,7 +45,7 @@ export const MainLayout: React.FC<Iprops> = ({ children, isContainer }) => {
   });
 
   useEffect(() => {
-    if (session && session.user.email && session.user.name) {
+    if (session && (session.user.email || session.user.name)) {
       setAuthUser({
         email: session.user.email,
         name: session.user.name,

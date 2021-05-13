@@ -5,6 +5,7 @@ import { AppProps } from 'next/app';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from '../src/util/theme';
 import '../styles/globals.css';
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider session={pageProps.session}>

@@ -13,6 +13,8 @@ import { ProviderTypes, Iprovider } from '../../src/entity/constant';
 import { MainLayout } from '../../components/MainLayout/MainLayout';
 import Image from 'next/image';
 import { Redirect } from '../../src/actions/Redirect';
+import { Icon as IconifyIcon } from '@iconify/react';
+import { auth0 } from './auth0';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -107,7 +109,13 @@ export default function SignIn({ providers }: { providers: ProviderTypes }) {
                             variant="contained"
                             color="primary"
                             className={classes.button}
-                            endIcon={<Icon className={`fab fa-${provider.name.toLowerCase()}`} />}
+                            endIcon={
+                              provider.name !== 'Auth0' ? (
+                                <Icon className={`fab fa-${provider.name.toLowerCase()}`} />
+                              ) : (
+                                <IconifyIcon icon={auth0} />
+                              )
+                            }
                           >
                             Sign in with
                           </Button>
