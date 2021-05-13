@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { Typography, Box } from '@material-ui/core';
 import { HospitalSearchFilter } from '../HospitalSearchFilter/HospitalSearchFilter';
 import { HospitalFilterInput } from '../HospitalFilterInput/HospitalFilterInput';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,13 +25,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const HospitalFilter: React.FC = () => {
   const classes = useStyles();
-
+  const router = useRouter();
   const onSearchSubmit = (state: string, zipcode: string) => {
-    console.log(zipcode);
-    console.log(state);
+    if (state !== '' && zipcode !== '') {
+      router.push(`/hospitals/${state},${zipcode}`);
+    } else {
+      router.push(`/hospitals/all`);
+    }
   };
   const onFilterSubmit = (hospitalType: string) => {
-    console.log(hospitalType);
+    router.push(`/hospitals/${hospitalType}`);
   };
 
   return (

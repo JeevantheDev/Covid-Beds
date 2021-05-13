@@ -166,11 +166,33 @@
       "arity": "Required"
     },
     {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Hospital",
+          "field": "locationState"
+        },
+        "directive": "unique"
+      }
+    },
+    {
       "tag": "CreateField",
       "model": "Hospital",
       "field": "locationZipcode",
       "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Hospital",
+          "field": "locationZipcode"
+        },
+        "directive": "unique"
+      }
     },
     {
       "tag": "CreateField",
@@ -189,7 +211,7 @@
     {
       "tag": "CreateField",
       "model": "Hospital",
-      "field": "hospiatlEmail",
+      "field": "hospitalEmail",
       "type": "String",
       "arity": "Required"
     },
@@ -199,7 +221,7 @@
         "path": {
           "tag": "Field",
           "model": "Hospital",
-          "field": "hospiatlEmail"
+          "field": "hospitalEmail"
         },
         "directive": "unique"
       }

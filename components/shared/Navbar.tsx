@@ -102,7 +102,7 @@ export const Navbar = (props: Props) => {
                 )}
                 <Divider orientation="vertical" flexItem />
                 <div>
-                  <Link href="/hospitals">
+                  <Link href="/hospitals/all">
                     <Button color="inherit">
                       <a>Browse</a>
                     </Button>

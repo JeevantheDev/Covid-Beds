@@ -103,7 +103,7 @@ export const HospitalForm: React.FC<Iprops> = ({ initialFormData, open, handleCl
                         value={values.addressHospital}
                         fullWidth
                         name="addressHospital"
-                        label="Hospital address"
+                        placeholder="{house number} {street} {postcode} {city} {state}"
                         variant="outlined"
                       />
                     </Grid>

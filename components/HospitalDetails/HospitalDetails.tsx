@@ -164,7 +164,7 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
         nameHospital: userDetails.Hospital[0].nameHospital,
         addressHospital: userDetails.Hospital[0].locationFormattedAddress,
         hospitalType: userDetails.Hospital[0].hospitalType,
-        hospitalEmail: userDetails.Hospital[0].hospiatlEmail,
+        hospitalEmail: userDetails.Hospital[0].hospitalEmail,
         hospitalContactNo: userDetails.Hospital[0].hospitalContactNo,
       });
       return;
@@ -180,7 +180,7 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
         nameHospital: userDetails.Hospital[0].nameHospital,
         addressHospital: userDetails.Hospital[0].locationFormattedAddress,
         hospitalType: userDetails.Hospital[0].hospitalType,
-        hospitalEmail: userDetails.Hospital[0].hospiatlEmail,
+        hospitalEmail: userDetails.Hospital[0].hospitalEmail,
         hospitalContactNo: userDetails.Hospital[0].hospitalContactNo,
       });
       setInitialHospitalBedsFormData({

@@ -16,11 +16,11 @@ model Hospital {
   locationCoordinates       String           
   locationFormattedAddress  String
   locationCity              String            
-  locationState             String            
-  locationZipcode           String            
-  locationCountryCode           String            
+  locationState             String  @unique          
+  locationZipcode           String  @unique          
+  locationCountryCode       String            
   hospitalType              String            
-  hospiatlEmail             String   @unique 
+  hospitalEmail             String   @unique 
   hospitalContactNo         String               
   hospitalImage             String?           
   createdAt                 DateTime          @default(now())

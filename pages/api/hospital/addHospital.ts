@@ -20,7 +20,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
         locationZipcode: body.locationZipcode,
         locationCountryCode: body.locationCountryCode,
         hospitalType: body.hospitalType,
-        hospiatlEmail: body.hospitalEmail,
+        hospitalEmail: body.hospitalEmail,
         hospitalContactNo: body.hospitalContactNo.toString(),
         hospitalImage: HOSPITAL_DEFAULT.IMAGE,
         user: {

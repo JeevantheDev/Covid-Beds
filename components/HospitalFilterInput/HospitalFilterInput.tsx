@@ -10,7 +10,7 @@ export interface Iprops {
 }
 
 export const HospitalFilterInput: React.FC<Iprops> = ({ onFilterSubmit }) => {
-  const [filterInput, setFilterInput] = useState<string>('any');
+  const [filterInput, setFilterInput] = useState<string>('all');
 
   const handleFilterInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterInput(e.target.value);
@@ -19,7 +19,6 @@ export const HospitalFilterInput: React.FC<Iprops> = ({ onFilterSubmit }) => {
   const handleFilterSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     onFilterSubmit(filterInput);
-    setFilterInput('');
   };
 
   return (
@@ -35,7 +34,7 @@ export const HospitalFilterInput: React.FC<Iprops> = ({ onFilterSubmit }) => {
             variant="outlined"
             name="filterInput"
           >
-            <MenuItem value="any">Any</MenuItem>
+            <MenuItem value="all">Any</MenuItem>
             {[HOSPITAL_TYPE.GOVT, HOSPITAL_TYPE.PVT].map((option) => (
               <MenuItem key={option} value={option}>
                 {option}

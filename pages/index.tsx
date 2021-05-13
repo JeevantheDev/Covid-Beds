@@ -8,10 +8,9 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Image from 'next/image';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
 import MicroFrontend from '../components/MicroFrontend/MicroFrontend';
+import { LandingPageForm } from '../components/LandingPageForm/LandingPageForm';
+import { useRouter } from 'next/router';
 
 const { REACT_APP_COVID_TRACKER_HOST: covidTrackerHost } = process.env;
 
@@ -49,6 +48,13 @@ function CovidTracker() {
 
 export default function Home() {
   const classes = useStyles();
+  const router = useRouter();
+
+  const onSearchSubmit = (state: string, zipcode: string) => {
+    if (state !== '' && zipcode !== '') {
+      router.push(`/hospitals/${state},${zipcode}`);
+    }
+  };
 
   return (
     <MainLayout isContainer>
@@ -76,17 +82,7 @@ export default function Home() {
                     className={classes.margin}
                     style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                   >
-                    <Grid container spacing={2}>
-                      <Grid item xs={12} md={6} sm={6}>
-                        <TextField fullWidth placeholder="Enter your country" id="outlined-basic" variant="outlined" />
-                      </Grid>
-                      <Grid item xs={12} md={6} sm={6}>
-                        <TextField fullWidth placeholder="Enter your zipcode" id="outlined-basic" variant="outlined" />
-                      </Grid>
-                    </Grid>
-                    <Button className={classes.button} variant="contained" color="secondary" startIcon={<SearchIcon />}>
-                      Search
-                    </Button>
+                    <LandingPageForm handleClickSearch={onSearchSubmit} />
                   </div>
                 </Box>
               </Box>

@@ -24,10 +24,6 @@ export const HospitalSearchFilter: React.FC<Iprops> = ({ onSearchSubmit }) => {
   const handleSearchSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     onSearchSubmit(locationInput.state, locationInput.zipcode);
-    setLocationInput({
-      state: '',
-      zipcode: '',
-    });
   };
 
   const { state, zipcode } = locationInput;
