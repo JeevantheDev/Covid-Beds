@@ -45,5 +45,5 @@ export enum HOSPITAL_TYPE {
 
 export enum HOSPITAL_DEFAULT {
   POINT = 'Point',
-  IMAGE = 'public/uploads/defualt.png',
+  IMAGE = 'public/uploads/defualt.jpg',
 }

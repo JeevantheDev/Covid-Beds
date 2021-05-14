@@ -14,7 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, Container, TextField, MenuItem } from '@material-ui/core';
-import { IcreateHospitalInitial } from '../../src/entity/reqParam';
+import { IcreateHospital } from '../../src/entity/reqParam';
 import { HOSPITAL_TYPE } from '../../src/entity/constant';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -43,17 +43,17 @@ const DialogContent = withStyles((theme: Theme) => ({
 }))(MuiDialogContent);
 
 interface Iprops {
-  initialFormData: IcreateHospitalInitial;
+  initialFormData: IcreateHospital;
   open: boolean;
   handleClose: () => void;
   loading: boolean;
-  handleSubmitForm: (values: IcreateHospitalInitial) => void;
+  handleSubmitForm: (values: IcreateHospital) => void;
 }
 
 export const HospitalForm: React.FC<Iprops> = ({ initialFormData, open, handleClose, loading, handleSubmitForm }) => {
   const classes = useStyles();
 
-  const handleSubmitFormData = async (values: IcreateHospitalInitial) => {
+  const handleSubmitFormData = async (values: IcreateHospital) => {
     handleSubmitForm(values);
   };
   return (
@@ -71,7 +71,7 @@ export const HospitalForm: React.FC<Iprops> = ({ initialFormData, open, handleCl
               initialValues={initialFormData}
               validationSchema={Yup.object().shape({
                 nameHospital: Yup.string().max(30).required('Hospital name is required'),
-                addressHospital: Yup.string().max(100).required('Hospital address is required'),
+                locationFormattedAddress: Yup.string().max(100).required('Hospital address is required'),
                 hospitalType: Yup.string().required('Hospital type is required.'),
                 hospitalEmail: Yup.string().email('Must be a valid email.').max(255).required('Email is required.'),
                 hospitalContactNo: Yup.number().min(10).required('Contact no is required.'),
@@ -96,13 +96,13 @@ export const HospitalForm: React.FC<Iprops> = ({ initialFormData, open, handleCl
                     </Grid>
                     <Grid item md={12} xs={12}>
                       <TextField
-                        error={Boolean(touched.addressHospital && errors.addressHospital)}
-                        helperText={touched.addressHospital && errors.addressHospital}
+                        error={Boolean(touched.locationFormattedAddress && errors.locationFormattedAddress)}
+                        helperText={touched.locationFormattedAddress && errors.locationFormattedAddress}
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        value={values.addressHospital}
+                        value={values.locationFormattedAddress}
                         fullWidth
-                        name="addressHospital"
+                        name="locationFormattedAddress"
                         placeholder="{house number} {street} {postcode} {city} {state}"
                         variant="outlined"
                       />

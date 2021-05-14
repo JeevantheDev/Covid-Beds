@@ -14,7 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, Container, TextField, MenuItem } from '@material-ui/core';
-import { IcreateHospitalBedsInitial } from '../../src/entity/reqParam';
+import { IcreateHospitalBeds } from '../../src/entity/reqParam';
 import { HOSPITAL_TYPE } from '../../src/entity/constant';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -43,11 +43,11 @@ const DialogContent = withStyles((theme: Theme) => ({
 }))(MuiDialogContent);
 
 interface Iprops {
-  initialFormData: IcreateHospitalBedsInitial;
+  initialFormData: IcreateHospitalBeds;
   open: boolean;
   handleClose: () => void;
   loading: boolean;
-  handleSubmitForm: (values: IcreateHospitalBedsInitial) => void;
+  handleSubmitForm: (values: IcreateHospitalBeds) => void;
 }
 
 export const HospitalBedsForm: React.FC<Iprops> = ({
@@ -59,7 +59,7 @@ export const HospitalBedsForm: React.FC<Iprops> = ({
 }) => {
   const classes = useStyles();
 
-  const handleSubmitFormData = async (values: IcreateHospitalBedsInitial) => {
+  const handleSubmitFormData = async (values: IcreateHospitalBeds) => {
     handleSubmitForm(values);
   };
   return (

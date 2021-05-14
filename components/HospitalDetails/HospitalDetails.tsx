@@ -15,13 +15,7 @@ import Button from '@material-ui/core/Button';
 import { Divider, Typography, Input } from '@material-ui/core';
 import { HospitalForm } from '../modal/HospitalForm';
 import { HospitalBedsForm } from '../modal/HospitalBedsForm';
-import axios from 'axios';
-import {
-  IcreateHospital,
-  IcreateHospitalBeds,
-  IcreateHospitalBedsInitial,
-  IcreateHospitalInitial,
-} from '../../src/entity/reqParam';
+import { IcreateHospital, IcreateHospitalBeds } from '../../src/entity/reqParam';
 import moment from 'moment';
 import {
   useUploadImage,
@@ -31,8 +25,9 @@ import {
   useCreateHospitalBeds,
   useUpdateHospitalBed,
 } from '../../src/actions/hospital';
-import { HOSPITAL_DEFAULT } from '../../src/entity/constant';
 import Chip from '@material-ui/core/Chip';
+import { useToasts } from 'react-toast-notifications';
+import { HOSPITAL_DEFAULT } from '../../src/entity/constant';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -116,20 +111,21 @@ interface IHospitalProps {
 
 export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading, mutate }) => {
   const classes = useStyles();
-
+  const { addToast } = useToasts();
   const [openHospitalModal, setOpenHospitalModal] = useState(false);
   const [openBedsModal, setOpenBedsModal] = useState(false);
   const [editFlag, setEditFlag] = useState<boolean>(false);
 
-  const [initialHospitalFormData, setInitialHospitalFormData] = useState<IcreateHospitalInitial>({
-    nameHospital: '',
-    addressHospital: '',
-    hospitalType: '',
-    hospitalEmail: '',
-    hospitalContactNo: '',
+  const [initialHospitalFormData, setInitialHospitalFormData] = useState<IcreateHospital>({
+    nameHospital: 'KIIMS Covid Care',
+    locationFormattedAddress: '45 Upper College Rd Kingston RI 02881',
+    hospitalType: 'PVT',
+    locationType: HOSPITAL_DEFAULT.POINT,
+    hospitalEmail: 'kiims@covid.co.in',
+    hospitalContactNo: '8877445522',
   });
 
-  const [initialHospitalBedsFormData, setInitialHospitalBedsFormData] = useState<IcreateHospitalBedsInitial>({
+  const [initialHospitalBedsFormData, setInitialHospitalBedsFormData] = useState<IcreateHospitalBeds>({
     hospitalId: 0,
     hospitalName: '',
     totalBeds: 0,
@@ -162,7 +158,7 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
     ) {
       setInitialHospitalFormData({
         nameHospital: userDetails.Hospital[0].nameHospital,
-        addressHospital: userDetails.Hospital[0].locationFormattedAddress,
+        locationFormattedAddress: userDetails.Hospital[0].locationFormattedAddress,
         hospitalType: userDetails.Hospital[0].hospitalType,
         hospitalEmail: userDetails.Hospital[0].hospitalEmail,
         hospitalContactNo: userDetails.Hospital[0].hospitalContactNo,
@@ -178,7 +174,7 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
     ) {
       setInitialHospitalFormData({
         nameHospital: userDetails.Hospital[0].nameHospital,
-        addressHospital: userDetails.Hospital[0].locationFormattedAddress,
+        locationFormattedAddress: userDetails.Hospital[0].locationFormattedAddress,
         hospitalType: userDetails.Hospital[0].hospitalType,
         hospitalEmail: userDetails.Hospital[0].hospitalEmail,
         hospitalContactNo: userDetails.Hospital[0].hospitalContactNo,
@@ -201,31 +197,20 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
   const [updateHospitalBed]: any = useUpdateHospitalBed();
 
   const handleDeleteHospital = async (id: number) => {
-    await deleteHospital(id).then(() => {
+    await deleteHospital(id).then(({ message }) => {
       mutate();
+      addToast(message, {
+        appearance: 'success',
+        autoDismiss: true,
+      });
     });
   };
 
-  const handleSubmitHospital = async (values?: IcreateHospitalInitial) => {
-    const { data } = await axios.get(`/api/map/${values.addressHospital.split(',').join(' ')}`);
-    if (data && data.length > 0) {
-      const formData: IcreateHospital = {
-        userId: userDetails.id,
-        nameHospital: values.nameHospital,
-        locationType: HOSPITAL_DEFAULT.POINT,
-        locationCoordinates: [data[0].latitude, data[0].longitude],
-        locationAddress: values.addressHospital,
-        locationFormattedAddress: data[0].formattedAddress,
-        locationCity: data[0].city,
-        locationState: data[0].stateCode,
-        locationZipcode: data[0].zipcode,
-        locationCountryCode: data[0].countryCode,
-        hospitalType: values.hospitalType,
-        hospitalEmail: values.hospitalEmail,
-        hospitalContactNo: values.hospitalContactNo,
-      };
-      if (!editFlag) {
-        await createHospital(formData).then(({ createdHospital, status }) => {
+  const handleSubmitHospital = async (values?: IcreateHospital) => {
+    if (!editFlag) {
+      values.userId = userDetails.id;
+      await createHospital(values)
+        .then(({ createdHospital, status, message }) => {
           setInitialHospitalBedsFormData({
             ...initialHospitalBedsFormData,
             hospitalId: createdHospital.id,
@@ -233,47 +218,81 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
           });
           if (status === 'success') {
             handleClose();
+            mutate();
           }
-          mutate();
+          addToast(message, {
+            appearance: 'success',
+            autoDismiss: true,
+          });
+        })
+        .catch(() => {
+          addToast('Something went wrong', {
+            appearance: 'error',
+            autoDismiss: true,
+          });
         });
-      } else {
-        formData.id = userDetails.Hospital[0].id;
-        await updateHospital(formData).then(({ status }) => {
+    } else {
+      values.id = userDetails.Hospital[0].id;
+      await updateHospital(values)
+        .then(({ status, message }) => {
           if (status === 'success') {
             handleClose();
+            mutate();
           }
-          mutate();
+          addToast(message, {
+            appearance: 'success',
+            autoDismiss: true,
+          });
+        })
+        .catch(() => {
+          addToast('Something went wrong', {
+            appearance: 'error',
+            autoDismiss: true,
+          });
         });
-      }
     }
   };
 
-  const handleSubmitHospitalBeds = async (values: IcreateHospitalBedsInitial) => {
+  const handleSubmitHospitalBeds = async (values: IcreateHospitalBeds) => {
     if (!editFlag) {
-      const formData: IcreateHospitalBeds = {
-        hospitalId: initialHospitalBedsFormData.hospitalId,
-        totalBeds: values.totalBeds,
-        currentBeds: values.currentBeds,
-      };
-      await createHospitalBeds(formData).then(({ status }) => {
-        if (status === 'success') {
-          handleClose();
-        }
-        mutate();
-      });
+      values.hospitalId = initialHospitalBedsFormData.hospitalId;
+      await createHospitalBeds(values)
+        .then(({ status, message }) => {
+          if (status === 'success') {
+            handleClose();
+            mutate();
+          }
+          addToast(message, {
+            appearance: 'success',
+            autoDismiss: true,
+          });
+        })
+        .catch(() => {
+          addToast('Something went wrong', {
+            appearance: 'error',
+            autoDismiss: true,
+          });
+        });
     } else {
-      const formData: IcreateHospitalBeds = {
-        id: userDetails.Hospital[0].HospitalBeds[0].id,
-        hospitalId: initialHospitalBedsFormData.hospitalId,
-        totalBeds: values.totalBeds,
-        currentBeds: values.currentBeds,
-      };
-      await updateHospitalBed(formData).then(({ status }) => {
-        if (status === 'success') {
-          handleClose();
-        }
-        mutate();
-      });
+      values.id = userDetails.Hospital[0].HospitalBeds[0].id;
+      values.hospitalId = initialHospitalBedsFormData.hospitalId;
+      await updateHospitalBed(values)
+        .then(({ status, message }) => {
+          if (status === 'success') {
+            handleClose();
+            mutate();
+          }
+          addToast(message, {
+            appearance: 'success',
+            autoDismiss: true,
+          });
+        })
+        .catch(() => {
+          addToast('Something went wrong', {
+            appearance: 'error',
+            autoDismiss: true,
+          });
+        });
     }
   };
 
@@ -289,13 +308,24 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
         id: userDetails.Hospital[0].id,
         hospitalImage: path,
       };
-      updateHospital(formData).then(({ status }) => {
-        if (status === 'success') {
-          handleClose();
-        }
-        mutate();
-        setImageFile(null);
-      });
+      updateHospital(formData)
+        .then(({ status, message }) => {
+          if (status === 'success') {
+            handleClose();
+            mutate();
+            setImageFile(null);
+          }
+          addToast(message, {
+            appearance: 'success',
+            autoDismiss: true,
+          });
+        })
+        .catch(() => {
+          addToast('Something went wrong', {
+            appearance: 'error',
+            autoDismiss: true,
+          });
+        });
     });
   };
 
@@ -321,7 +351,7 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
     setEditFlag(false);
     setInitialHospitalFormData({
       nameHospital: '',
-      addressHospital: '',
+      locationFormattedAddress: '',
       hospitalType: '',
       hospitalEmail: '',
       hospitalContactNo: '',

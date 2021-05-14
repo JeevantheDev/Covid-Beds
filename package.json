@@ -45,6 +45,7 @@
     "react-mapbox-gl": "^4.8.0",
     "react-share": "^4.4.0",
     "react-test-renderer": "^16.13.1",
+    "react-toast-notifications": "^2.4.4",
     "sass": "^1.32.12",
     "shx": "^0.3.3",
     "swr": "^0.3.9",

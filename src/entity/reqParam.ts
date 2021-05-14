@@ -1,13 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export interface IcreateHospitalInitial {
-  addressHospital: string;
-  nameHospital: string;
-  hospitalType: string;
-  hospitalEmail: string;
-  hospitalContactNo: string;
-}
-
 export interface IcreateHospital {
   id?: number;
   userId?: number;
@@ -38,6 +30,7 @@ export interface IcreateHospitalBedsInitial {
 
 export interface IcreateHospitalBeds {
   id?: number;
+  hospitalName?: string;
   hospitalId?: number;
   totalBeds: number;
   currentBeds: number;
