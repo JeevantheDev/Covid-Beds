@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +16,8 @@ import Image from 'next/image';
 import { Redirect } from '../../src/actions/Redirect';
 import { Icon as IconifyIcon } from '@iconify/react';
 import { auth0 } from './auth0';
+import { useRouter } from 'next/router';
+import { useToasts } from 'react-toast-notifications';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,7 +75,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SignIn({ providers }: { providers: ProviderTypes }) {
   const classes = useStyles();
+  const { addToast } = useToasts();
   const [session, loading] = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.error) {
+      showErrorToast();
+    }
+  }, [router]);
+
+  const showErrorToast = () => {
+    addToast('Something went wrong', {
+      appearance: 'error',
+      autoDismiss: true,
+    });
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -117,7 +135,7 @@ export default function SignIn({ providers }: { providers: ProviderTypes }) {
                               )
                             }
                           >
-                            Sign in with
+                            Join Us with
                           </Button>
                         );
                       })}

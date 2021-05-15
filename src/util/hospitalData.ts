@@ -1,5 +1,53 @@
 import { HOSPITAL_DEFAULT, HOSPITAL_TYPE } from 'src/entity/constant';
-import { IcreateHospital } from '../../src/entity/reqParam';
+import { IcreateHospital, IcreateHospitalBeds } from '../../src/entity/reqParam';
+
+export const seedersHospitalBeds: IcreateHospitalBeds[] = [
+  {
+    hospitalId: 5,
+    totalBeds: 900,
+    currentBeds: 600,
+  },
+  {
+    hospitalId: 6,
+    totalBeds: 800,
+    currentBeds: 200,
+  },
+  {
+    hospitalId: 7,
+    totalBeds: 500,
+    currentBeds: 400,
+  },
+  {
+    hospitalId: 8,
+    totalBeds: 1200,
+    currentBeds: 400,
+  },
+  {
+    hospitalId: 9,
+    totalBeds: 1500,
+    currentBeds: 1000,
+  },
+  {
+    hospitalId: 10,
+    totalBeds: 3500,
+    currentBeds: 1900,
+  },
+  {
+    hospitalId: 11,
+    totalBeds: 300,
+    currentBeds: 100,
+  },
+  {
+    hospitalId: 12,
+    totalBeds: 1500,
+    currentBeds: 600,
+  },
+  {
+    hospitalId: 13,
+    totalBeds: 500,
+    currentBeds: 50,
+  },
+];
 
 const defaultHospitalImage = {
   1: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG9zcGl0YWx8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
@@ -22,7 +70,7 @@ const defaultHospitalImage = {
 export const seedersHospital: IcreateHospital[] = [
   {
     nameHospital: 'Devis COVID Care',
-    locationAddress: '218 Church St, Ripley, MS, 38663',
+    locationFormattedAddress: '218 Church St, Ripley, MS, 38663',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.PVT,
     hospitalEmail: 'devis@covid.co',
@@ -32,7 +80,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Hezio COVID Care',
-    locationAddress: '37479 Lakeshore Dr, Harrison Township, MI, 48045',
+    locationFormattedAddress: '37479 Lakeshore Dr, Harrison Township, MI, 48045',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.PVT,
     hospitalEmail: 'Hezio@covid.co',
@@ -42,7 +90,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Bexico COVID Care',
-    locationAddress: '5048 New Exd Rd, Hollywood, SC, 29449',
+    locationFormattedAddress: '5048 New Exd Rd, Hollywood, SC, 29449',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.GOVT,
     hospitalEmail: 'Bexico@covid.co',
@@ -52,7 +100,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Huzeis COVID Care',
-    locationAddress: 'Tweedside Industrial Estate, Berwick-Upon-Tweed, TD15 2XF',
+    locationFormattedAddress: 'Tweedside Industrial Estate, Berwick-Upon-Tweed, TD15 2XF',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.PVT,
     hospitalEmail: 'Huzeis@covid.co',
@@ -62,7 +110,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Naskri COVID Care',
-    locationAddress: '53-55, Haryington Avenue, Warrington, WA5 0AY',
+    locationFormattedAddress: '53-55, Haryington Avenue, Warrington, WA5 0AY',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.GOVT,
     hospitalEmail: 'Naskri@covid.co',
@@ -72,7 +120,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Kenryasu COVID Care',
-    locationAddress: '2-420 Squirrel St , Banff, AB, T1L',
+    locationFormattedAddress: '2-420 Squirrel St , Banff, AB, T1L',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.GOVT,
     hospitalEmail: 'Kenryasu@covid.co',
@@ -82,7 +130,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Gizenri COVID Care',
-    locationAddress: '236 Elgin Av , Carbon, AB, T0M 0L0',
+    locationFormattedAddress: '236 Elgin Av , Carbon, AB, T0M 0L0',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.PVT,
     hospitalEmail: 'Gizenri@covid.co',
@@ -92,7 +140,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Sezyui COVID Care',
-    locationAddress: '3 Gant St, Lenah Valley, TAS 7008',
+    locationFormattedAddress: '3 Gant St, Lenah Valley, TAS 7008',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.GOVT,
     hospitalEmail: 'Sezyui@covid.co',
@@ -102,7 +150,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Henryuiz COVID Care',
-    locationAddress: '33 Albert Hill Rd, Lilydale, VIC 3140',
+    locationFormattedAddress: '33 Albert Hill Rd, Lilydale, VIC 3140',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.PVT,
     hospitalEmail: 'Henryuiz@covid.co',
@@ -112,7 +160,7 @@ export const seedersHospital: IcreateHospital[] = [
   },
   {
     nameHospital: 'Karrenrez COVID Care',
-    locationAddress: '34 Martin St, Indented Head, VIC 3223 ',
+    locationFormattedAddress: '34 Martin St, Indented Head, VIC 3223 ',
     locationType: HOSPITAL_DEFAULT.POINT,
     hospitalType: HOSPITAL_TYPE.GOVT,
     hospitalEmail: 'Karrenrez@covid.co',

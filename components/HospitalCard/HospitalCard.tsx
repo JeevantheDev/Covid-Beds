@@ -71,14 +71,19 @@ export const HospitalCard: React.FC<Iprops> = ({ hospitalDetail }) => {
       <Paper className={classes.gridContainer} variant="outlined">
         <Box className={classes.columnFlexProperty} display="flex" justifyContent="space-between" alignItems="center">
           <Box style={{ width: '80%' }} flex="0.6">
-            <Image
-              className={classes.imageMobileScreen}
-              loading="eager"
-              objectFit="cover"
-              width="200"
-              height="175"
-              src={`/uploads/${hospitalDetail.hospitalImage.split('public/uploads/')[1]}`}
-            />
+            {hospitalDetail.hospitalImage.includes('public/upload') && (
+              <Image
+                className={classes.imageMobileScreen}
+                loading="eager"
+                objectFit="cover"
+                width="200"
+                height="175"
+                src={`/uploads/${hospitalDetail.hospitalImage.split('public/uploads/')[1]}`}
+              />
+            )}
+            {!hospitalDetail.hospitalImage.includes('public/upload') && (
+              <img className={classes.imageMobileScreen} width="200" height="175" src={hospitalDetail.hospitalImage} />
+            )}
           </Box>
           <Box
             ml={2}

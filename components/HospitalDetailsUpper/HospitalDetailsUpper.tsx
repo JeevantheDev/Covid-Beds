@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -16,7 +16,6 @@ import {
 } from 'react-share';
 
 import { FacebookIcon, LinkedinIcon, PinterestIcon, TwitterIcon, WhatsappIcon } from 'react-share';
-import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,13 +69,18 @@ type Props = {
 
 export const HospitalDetailsUpper = ({ hospitalDetails }: Props) => {
   const classes = useStyles();
+  const [backgroundImage] = useState(hospitalDetails.hospitalImage);
   return (
     <>
       <Box
         style={{
-          background: `url(/uploads/${
-            hospitalDetails.hospitalImage.split('public/uploads/')[1]
-          }) no-repeat center center/cover`,
+          background: `${
+            backgroundImage.includes('public/uploads/')
+              ? `url(/uploads/${
+                  hospitalDetails.hospitalImage.split('public/uploads/')[1]
+                }) no-repeat center center/cover`
+              : `url(${backgroundImage}) no-repeat center center/cover`
+          } `,
         }}
         className={classes.upperContainer}
       >

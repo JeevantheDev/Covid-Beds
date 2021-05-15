@@ -9,13 +9,16 @@ function HospitalInfo(props) {
   return (
     <div>
       <div>{displayName}</div>
-      <Image
-        loading="eager"
-        objectFit="contain"
-        width="200"
-        height="175"
-        src={`/uploads/${info.hospitalImage.split('public/uploads/')[1]}`}
-      />
+      {info.hospitalImage.includes('public/upload') && (
+        <Image
+          loading="eager"
+          objectFit="contain"
+          width="200"
+          height="175"
+          src={`/uploads/${info.hospitalImage.split('public/uploads/')[1]}`}
+        />
+      )}
+      {!info.hospitalImage.includes('public/upload') && <img width="200" height="175" src={info.hospitalImage} />}
     </div>
   );
 }

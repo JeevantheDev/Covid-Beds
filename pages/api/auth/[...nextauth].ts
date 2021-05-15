@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 const options = {
   pages: {
     signIn: '/auth/signin',
-    error: '/auth/error',
+    error: '/auth/signin',
   },
   providers: [
     Providers.Auth0({

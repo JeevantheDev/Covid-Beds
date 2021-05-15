@@ -33,7 +33,7 @@ export interface Iprovider {
 }
 
 export type ProviderTypes = {
-  github?: Iprovider;
+  Auth0?: Iprovider;
   google?: Iprovider;
   facebook?: Iprovider;
 };

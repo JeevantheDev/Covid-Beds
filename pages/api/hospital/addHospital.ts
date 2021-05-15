@@ -35,7 +35,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
           hospitalType: body.hospitalType,
           hospitalEmail: body.hospitalEmail,
           hospitalContactNo: body.hospitalContactNo.toString(),
-          hospitalImage: HOSPITAL_DEFAULT.IMAGE,
+          hospitalImage: body.hospitalImage,
           user: {
             connect: {
               id: body.userId,

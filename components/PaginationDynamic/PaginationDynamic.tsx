@@ -15,14 +15,15 @@ const useStyles = makeStyles((theme) =>
 
 interface Iprops {
   count: number;
-  handleChange: (event: React.ChangeEvent<unknown>, value: number) => void;
+  page: number;
+  handleNextPage: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
-export const PaginationDynamic: React.FC<Iprops> = ({ count, handleChange }) => {
+export const PaginationDynamic: React.FC<Iprops> = ({ count, page, handleNextPage }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Pagination onChange={handleChange} count={count} shape="rounded" />
+      <Pagination page={page} onChange={handleNextPage} color="secondary" count={count} shape="rounded" />
     </div>
   );
 };

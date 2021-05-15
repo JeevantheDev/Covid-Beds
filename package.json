@@ -41,14 +41,17 @@
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.9",
     "react-geocode": "^0.2.3",
+    "react-images-upload": "^1.2.8",
     "react-map-gl": "^6.1.14",
     "react-mapbox-gl": "^4.8.0",
     "react-share": "^4.4.0",
+    "react-spinners": "^0.10.6",
     "react-test-renderer": "^16.13.1",
     "react-toast-notifications": "^2.4.4",
     "sass": "^1.32.12",
     "shx": "^0.3.3",
     "swr": "^0.3.9",
+    "tesseract.js": "^2.1.4",
     "yup": "^0.32.9"
   },
   "devDependencies": {

@@ -10,7 +10,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
     const page = searchFilter[1];
     if (searchFilter[0] === 'all') {
       const allHospitals = await prisma.hospital.findMany({
-        skip: parseInt(page),
+        skip: parseInt(page) * 5,
         take: 5,
         include: { HospitalBeds: true },
       });
@@ -20,7 +20,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
       return res.status(200).json({ allHospitals, count: count.length });
     } else if (searchFilter[0] === 'PVT' || searchFilter[0] === 'GOVT') {
       const allHospitals = await prisma.hospital.findMany({
-        skip: parseInt(page),
+        skip: parseInt(page) * 5,
         take: 5,
         where: {
           hospitalType: String(searchFilter[0]),
@@ -38,7 +38,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
       const state: string = searchFilter[0].split(',')[0];
       const zipcode: string = searchFilter[0].split(',')[1];
       const allHospitals = await prisma.hospital.findMany({
-        skip: parseInt(page),
+        skip: parseInt(page) * 5,
         take: 5,
         where: {
           locationState: String(state),

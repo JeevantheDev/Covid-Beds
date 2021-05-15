@@ -21,13 +21,6 @@ export interface IcreateHospital {
   hospitalImage?: string;
 }
 
-export interface IcreateHospitalBedsInitial {
-  hospitalId: number;
-  hospitalName: string;
-  totalBeds: number;
-  currentBeds: number;
-}
-
 export interface IcreateHospitalBeds {
   id?: number;
   hospitalName?: string;

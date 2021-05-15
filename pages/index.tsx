@@ -11,8 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import MicroFrontend from '../components/MicroFrontend/MicroFrontend';
 import { LandingPageForm } from '../components/LandingPageForm/LandingPageForm';
 import { useRouter } from 'next/router';
-import { seedersHospital } from '../src/util/hospitalData';
-import axios from 'axios';
+// import { Seeders } from '../components/shared/Seeders';
 
 const { REACT_APP_COVID_TRACKER_HOST: covidTrackerHost } = process.env;
 
@@ -58,10 +57,6 @@ export default function Home() {
     }
   };
 
-  const onCreateSeeder = async () => {
-    await axios.post('/api/hospital/addHospital', seedersHospital[0]);
-  };
-
   return (
     <MainLayout isContainer>
       <div className={classes.root}>
@@ -89,7 +84,6 @@ export default function Home() {
                     style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                   >
                     <LandingPageForm handleClickSearch={onSearchSubmit} />
-                    <button onClick={onCreateSeeder}>Seeding data Create</button>
                   </div>
                 </Box>
               </Box>

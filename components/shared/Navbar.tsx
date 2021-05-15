@@ -58,9 +58,9 @@ export const Navbar = (props: Props) => {
               <Box display="flex" justifyContent="center" alignItems="center">
                 {!props.authenticated && (
                   <div>
-                    <Link href="/auth/signin">
+                    <Link href="/verifyUser">
                       <Button color="inherit">
-                        <a>Sign in</a>
+                        <a>Join Us</a>
                       </Button>
                     </Link>
                   </div>

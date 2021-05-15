@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState } from 'react';
 import { MainLayout } from '../../components/MainLayout/MainLayout';
@@ -47,9 +48,11 @@ export default function Hospitals() {
   const router = useRouter();
   const { hospitalSearch } = router.query;
   const [page, setPage] = useState(0);
+  const [pageValue, setPageValue] = useState(1);
   const { data, loading } = useRequest({ url: `/api/hospital/${hospitalSearch}/${page}` }, null);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+    setPage(value - 1);
+    setPageValue(value);
   };
   return (
     <MainLayout>
@@ -72,7 +75,11 @@ export default function Hospitals() {
                       return <HospitalCard key={hospital.id} hospitalDetail={hospital} />;
                     })}
                   {!loading && data.count > 5 && (
-                    <PaginationDynamic handleChange={handleChange} count={Math.round(data.count / 2)} />
+                    <PaginationDynamic
+                      page={pageValue}
+                      handleNextPage={handleChange}
+                      count={Math.ceil(data.count / 5)}
+                    />
                   )}
                 </>
               </Grid>
