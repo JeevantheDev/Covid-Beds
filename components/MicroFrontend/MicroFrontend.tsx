@@ -21,7 +21,7 @@ function MicroFrontend({ name, host }) {
         const script = document.createElement('script');
         script.id = scriptId;
         script.crossOrigin = '';
-        script.src = `${host}${manifest.files['main.js'].split('/Covid-tracker-microfrontend')[1]}`;
+        script.src = `${host}${manifest.files['main.js']}`;
         script.onload = () => {
           renderMicroFrontend();
         };

@@ -12,7 +12,7 @@ import MicroFrontend from '../components/MicroFrontend/MicroFrontend';
 import { LandingPageForm } from '../components/LandingPageForm/LandingPageForm';
 import { useRouter } from 'next/router';
 // import { Seeders } from '../components/shared/Seeders';
-
+import { SeoWrapper } from '../components/shared/SeoWrapper';
 const { REACT_APP_COVID_TRACKER_HOST: covidTrackerHost } = process.env;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     paper: {
       width: '100%',
-      height: '90vh',
+      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -39,6 +39,10 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.text.secondary,
       textAlign: 'center',
       backgroundColor: theme.palette.secondary.light,
+      [(theme.breakpoints.down('sm'), theme.breakpoints.down('md'))]: {
+        justifyContent: 'center',
+        height: '100%',
+      },
     },
   })
 );
@@ -58,39 +62,41 @@ export default function Home() {
   };
 
   return (
-    <MainLayout isContainer>
-      <div className={classes.root}>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6} sm={6}>
-            <Paper elevation={0} className={classes.paper}>
-              <Image loading="eager" objectFit="contain" src="/landing.svg" alt="landing" width="1000" height="1000" />
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={6} sm={6}>
-            <Paper elevation={0} className={classes.paper}>
-              <Box mb={2} style={{ width: '100%', height: '100%' }}>
-                <CovidTracker />
-              </Box>
-              <Box>
-                <Box>
-                  <Typography variant="h3" color="primary" gutterBottom>
-                    Find a Covid Hospital
-                  </Typography>
-                  <span style={{ fontWeight: 'lighter', fontSize: '20px' }}>Search by Your Location</span>
+    <SeoWrapper title="Covid Beds | Welcome">
+      <MainLayout isContainer>
+        <div className={classes.root}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={6} sm={12}>
+              <Paper elevation={0} className={classes.paper}>
+                <Image objectFit="contain" src="/landing.svg" alt="landing" width="1000" height="1000" />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={6} sm={12}>
+              <Paper elevation={0} className={classes.paper}>
+                <Box mb={2} style={{ width: '100%', height: '100%' }}>
+                  <CovidTracker />
                 </Box>
                 <Box>
-                  <div
-                    className={classes.margin}
-                    style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
-                  >
-                    <LandingPageForm handleClickSearch={onSearchSubmit} />
-                  </div>
+                  <Box>
+                    <Typography variant="h3" color="primary" gutterBottom>
+                      Find a Covid Hospital
+                    </Typography>
+                    <span style={{ fontWeight: 'lighter', fontSize: '20px' }}>Search by Your Location</span>
+                  </Box>
+                  <Box>
+                    <div
+                      className={classes.margin}
+                      style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+                    >
+                      <LandingPageForm handleClickSearch={onSearchSubmit} />
+                    </div>
+                  </Box>
                 </Box>
-              </Box>
-            </Paper>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
-    </MainLayout>
+        </div>
+      </MainLayout>
+    </SeoWrapper>
   );
 }

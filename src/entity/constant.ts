@@ -47,3 +47,9 @@ export enum HOSPITAL_DEFAULT {
   POINT = 'Point',
   IMAGE = 'public/uploads/defualt.jpg',
 }
+
+export enum VERIFY_USER_CONDITIONS {
+  NOTE1 = 'Make sure you have valid a Photo ID as a Medical Staff.',
+  NOTE2 = 'Without Proper verifying of your Photo ID you can not proceed to login an account.',
+  NOTE3 = 'After verified successfully you can go for login and then create your hospital with proper details respectively.',
+}

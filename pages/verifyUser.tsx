@@ -1,10 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { MainLayout } from '../components/MainLayout/MainLayout';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
 import { UserImageVerify } from '../components/UserImageVerify/UserImageVerify';
+import { useCookies } from 'react-cookie';
+import { uuid } from 'uuidv4';
+import { useSession } from 'next-auth/client';
+import { Redirect } from '../src/actions/Redirect';
+import { SeoWrapper } from '../components/shared/SeoWrapper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,20 +43,37 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function VerifyUser() {
   const classes = useStyles();
   const router = useRouter();
-  const [isVerified, setIsVerified] = useState<boolean>(false);
-
+  const [session, loading] = useSession();
+  const [cookie, setCookie] = useCookies(['verifiedID']);
   const handleVerifiedUser = (isVerify) => {
-    setIsVerified(isVerify);
     if (isVerify) {
-      router.push('/auth/signin');
+      const signinID: string = uuid();
+      setCookie('verifiedID', signinID, {
+        path: '/',
+        maxAge: 3600, // Expires after 1hr
+        sameSite: true,
+      });
+      router.push(`/auth/signin/${signinID}`);
+    } else {
+      return;
     }
   };
 
-  return (
-    <MainLayout isContainer>
-      <div className={classes.root}>
-        <UserImageVerify handleVerifiedUser={handleVerifiedUser} />
-      </div>
-    </MainLayout>
-  );
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (session) {
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <SeoWrapper title="Covid Beds | Verify" canonicalPath="/verifyUser">
+        <MainLayout isContainer>
+          <div className={classes.root}>
+            <UserImageVerify handleVerifiedUser={handleVerifiedUser} />
+          </div>
+        </MainLayout>
+      </SeoWrapper>
+    );
+  }
 }

@@ -16,6 +16,7 @@ export const HospitalMapBox: React.FC<Iprops> = ({ hospitalDatas }) => {
 
   useEffect(() => {
     if (hospitalDatas.length > 0) {
+      setCoordinates([]);
       hospitalDatas.map((hospital: IcreateHospital) => {
         return setCoordinates((coordinates) => [
           ...coordinates,
@@ -29,6 +30,7 @@ export const HospitalMapBox: React.FC<Iprops> = ({ hospitalDatas }) => {
         ]);
       });
     } else {
+      setCoordinates([]);
       setCoordinates((coordinates) => [
         ...coordinates,
         {

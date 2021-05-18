@@ -28,20 +28,10 @@ class MyDocument extends Document {
           <style jsx global>
             {`
               html,
-              body {
-                height: 100%;
-                width: 100%;
-              }
               *,
               *:after,
               *:before {
                 box-sizing: border-box;
-              }
-              body {
-                font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-                font-size: 1rem;
-                margin: 0;
-                background-color: #f4f4f4;
               }
             `}
           </style>
@@ -56,7 +46,6 @@ class MyDocument extends Document {
 }
 
 MyDocument.getInitialProps = async (ctx) => {
-  // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
@@ -69,7 +58,6 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       <React.Fragment key="styles">
         {initialProps.styles}

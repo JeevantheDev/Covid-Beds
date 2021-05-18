@@ -13,8 +13,8 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { Divider, Typography, Input } from '@material-ui/core';
-import { HospitalForm } from '../modal/HospitalForm';
-import { HospitalBedsForm } from '../modal/HospitalBedsForm';
+import { HospitalForm } from '../modal/HospitalForm/HospitalForm';
+import { HospitalBedsForm } from '../modal/HospitalBedsForm/HospitalBedsForm';
 import { IcreateHospital, IcreateHospitalBeds } from '../../src/entity/reqParam';
 import moment from 'moment';
 import {
@@ -27,7 +27,6 @@ import {
 } from '../../src/actions/hospital';
 import Chip from '@material-ui/core/Chip';
 import { useToasts } from 'react-toast-notifications';
-import { HOSPITAL_DEFAULT } from '../../src/entity/constant';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -117,12 +116,12 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
   const [editFlag, setEditFlag] = useState<boolean>(false);
 
   const [initialHospitalFormData, setInitialHospitalFormData] = useState<IcreateHospital>({
-    nameHospital: 'KIIMS Covid Care',
-    locationFormattedAddress: '45 Upper College Rd Kingston RI 02881',
-    hospitalType: 'PVT',
-    locationType: HOSPITAL_DEFAULT.POINT,
-    hospitalEmail: 'kiims@covid.co.in',
-    hospitalContactNo: '8877445522',
+    nameHospital: '',
+    locationFormattedAddress: '',
+    hospitalType: '',
+    locationType: '',
+    hospitalEmail: '',
+    hospitalContactNo: '',
   });
 
   const [initialHospitalBedsFormData, setInitialHospitalBedsFormData] = useState<IcreateHospitalBeds>({

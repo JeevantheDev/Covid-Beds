@@ -61,13 +61,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Iprops {
+export interface Iprops {
   hospitalDetail: IcreateHospital;
 }
 export const HospitalCard: React.FC<Iprops> = ({ hospitalDetail }) => {
   const classes = useStyles();
   return (
-    <Grid item xs={12} md={12} sm={6}>
+    <Grid data-testid="hospital-card" item xs={12} md={12} sm={6}>
       <Paper className={classes.gridContainer} variant="outlined">
         <Box className={classes.columnFlexProperty} display="flex" justifyContent="space-between" alignItems="center">
           <Box style={{ width: '80%' }} flex="0.6">

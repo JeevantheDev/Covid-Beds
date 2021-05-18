@@ -7,15 +7,6 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import { IcreateHospital } from '../../src/entity/reqParam';
-import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  PinterestShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-} from 'react-share';
-
-import { FacebookIcon, LinkedinIcon, PinterestIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,6 +61,7 @@ type Props = {
 export const HospitalDetailsUpper = ({ hospitalDetails }: Props) => {
   const classes = useStyles();
   const [backgroundImage] = useState(hospitalDetails.hospitalImage);
+
   return (
     <>
       <Box

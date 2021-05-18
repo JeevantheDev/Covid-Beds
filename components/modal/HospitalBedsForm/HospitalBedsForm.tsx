@@ -14,8 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, Container, TextField, MenuItem } from '@material-ui/core';
-import { IcreateHospital } from '../../src/entity/reqParam';
-import { HOSPITAL_TYPE } from '../../src/entity/constant';
+import { IcreateHospitalBeds } from '../../../src/entity/reqParam';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,25 +41,31 @@ const DialogContent = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogContent);
 
-interface Iprops {
-  initialFormData: IcreateHospital;
+export interface Iprops {
+  initialFormData: IcreateHospitalBeds;
   open: boolean;
   handleClose: () => void;
-  loading: boolean;
-  handleSubmitForm: (values: IcreateHospital) => void;
+  loading?: boolean;
+  handleSubmitForm: (values: IcreateHospitalBeds) => void;
 }
 
-export const HospitalForm: React.FC<Iprops> = ({ initialFormData, open, handleClose, loading, handleSubmitForm }) => {
+export const HospitalBedsForm: React.FC<Iprops> = ({
+  initialFormData,
+  open,
+  handleClose,
+  loading,
+  handleSubmitForm,
+}) => {
   const classes = useStyles();
 
-  const handleSubmitFormData = async (values: IcreateHospital) => {
+  const handleSubmitFormData = async (values: IcreateHospitalBeds) => {
     handleSubmitForm(values);
   };
   return (
     <div>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <MuiDialogTitle disableTypography className={classes.root}>
-          <Typography variant="h6">Hospital</Typography>
+          <Typography variant="h6">Hospital Beds</Typography>
           <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
             <CloseIcon />
           </IconButton>
@@ -70,93 +75,63 @@ export const HospitalForm: React.FC<Iprops> = ({ initialFormData, open, handleCl
             <Formik
               initialValues={initialFormData}
               validationSchema={Yup.object().shape({
-                nameHospital: Yup.string().max(30).required('Hospital name is required'),
-                locationFormattedAddress: Yup.string().max(100).required('Hospital address is required'),
-                hospitalType: Yup.string().required('Hospital type is required.'),
-                hospitalEmail: Yup.string().email('Must be a valid email.').max(255).required('Email is required.'),
-                hospitalContactNo: Yup.number().min(10).required('Contact no is required.'),
+                hospitalName: Yup.string().required('Hospital Name is required.'),
+                totalBeds: Yup.number().required('Hospital Total Beds is required'),
+                currentBeds: Yup.number().required('Hospital Current Beds is required'),
               })}
               onSubmit={handleSubmitFormData}
             >
               {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
-                <form className={classes.formContainer} noValidate autoComplete="off">
+                <form data-test-id="hospital-beds-form" className={classes.formContainer}>
                   <Grid container spacing={3}>
                     <Grid item md={12} xs={12}>
                       <TextField
-                        error={Boolean(touched.nameHospital && errors.nameHospital)}
+                        inputProps={{ 'data-testid': 'hospitalName' }}
+                        error={Boolean(touched.hospitalName && errors.hospitalName)}
                         fullWidth
-                        helperText={touched.nameHospital && errors.nameHospital}
+                        disabled
+                        helperText={touched.hospitalName && errors.hospitalName}
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        value={values.nameHospital}
-                        name="nameHospital"
+                        value={values.hospitalName}
+                        name="hospitalName"
                         label="Hospital name"
                         variant="outlined"
                       />
                     </Grid>
                     <Grid item md={12} xs={12}>
                       <TextField
-                        error={Boolean(touched.locationFormattedAddress && errors.locationFormattedAddress)}
-                        helperText={touched.locationFormattedAddress && errors.locationFormattedAddress}
+                        inputProps={{ 'data-testid': 'totalBeds' }}
+                        error={Boolean(touched.totalBeds && errors.totalBeds)}
+                        helperText={touched.totalBeds && errors.totalBeds}
                         onBlur={handleBlur}
                         onChange={handleChange}
-                        value={values.locationFormattedAddress}
+                        value={values.totalBeds}
                         fullWidth
-                        name="locationFormattedAddress"
-                        placeholder="{house number} {street} {postcode} {city} {state}"
+                        name="totalBeds"
+                        label="Total Beds"
                         variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item md={4} xs={12}>
-                      <TextField
-                        error={Boolean(touched.hospitalType && errors.hospitalType)}
-                        helperText={touched.hospitalType && errors.hospitalType}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.hospitalType}
-                        name="hospitalType"
-                        select
-                        fullWidth
-                        label="Hospital type"
-                        variant="outlined"
-                      >
-                        {[HOSPITAL_TYPE.PVT, HOSPITAL_TYPE.GOVT].map((type: string, idx: number) => (
-                          <MenuItem key={idx} value={type}>
-                            {type}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                    </Grid>
-                    <Grid item md={4} xs={12}>
-                      <TextField
-                        error={Boolean(touched.hospitalEmail && errors.hospitalEmail)}
-                        helperText={touched.hospitalEmail && errors.hospitalEmail}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.hospitalEmail}
-                        fullWidth
-                        type="email"
-                        name="hospitalEmail"
-                        label="Hospital email"
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item md={4} xs={12}>
-                      <TextField
-                        error={Boolean(touched.hospitalContactNo && errors.hospitalContactNo)}
-                        helperText={touched.hospitalContactNo && errors.hospitalContactNo}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.hospitalContactNo}
                         type="number"
+                      />
+                    </Grid>
+                    <Grid item md={12} xs={12}>
+                      <TextField
+                        inputProps={{ 'data-testid': 'currentBeds' }}
+                        error={Boolean(touched.currentBeds && errors.currentBeds)}
+                        helperText={touched.currentBeds && errors.currentBeds}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.currentBeds}
                         fullWidth
-                        name="hospitalContactNo"
-                        label="Contact no"
+                        type="number"
+                        name="currentBeds"
+                        label="Current Beds"
                         variant="outlined"
                       />
                     </Grid>
                   </Grid>
                   <Button
+                    data-testid="submit"
                     style={{ marginTop: '15px' }}
                     color="primary"
                     fullWidth

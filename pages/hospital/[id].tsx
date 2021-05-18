@@ -12,6 +12,7 @@ import { PrismaClient } from '@prisma/client';
 import { HospitalDetailsUpper } from '../../components/HospitalDetailsUpper/HospitalDetailsUpper';
 import { HospitalDetailsMiddle } from '../../components/HospitalDetailsMiddle/HospitalDetailsMiddle';
 import { HospitalDetailsLower } from '../../components/HospitalDetailsLower/HospitalDetailsLower';
+import { SeoWrapper } from '../../components/shared/SeoWrapper';
 
 const prisma = new PrismaClient();
 
@@ -32,7 +33,12 @@ export default function HospitalById({ hospitalDetails }: Props) {
   const classes = useStyles();
   const [currentHospital] = useState<IcreateHospital>(JSON.parse(hospitalDetails));
   return (
-    <>
+    <SeoWrapper
+      title={`Covid Beds | ${currentHospital.nameHospital}`}
+      metaDescription={currentHospital.locationFormattedAddress}
+      ogImage={currentHospital.hospitalImage.split('public/')[1]}
+      canonicalPath={`/hospital/${currentHospital.id}`}
+    >
       <MainLayout>
         <div className={classes.root}>
           <HospitalDetailsUpper hospitalDetails={currentHospital} />
@@ -42,7 +48,7 @@ export default function HospitalById({ hospitalDetails }: Props) {
           </Container>
         </div>
       </MainLayout>
-    </>
+    </SeoWrapper>
   );
 }
 

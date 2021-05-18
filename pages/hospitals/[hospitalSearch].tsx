@@ -13,6 +13,7 @@ import { HospitalMapBox } from '../../components/HospitalMapBox/HospitalMapBox';
 import { PaginationDynamic } from '../../components/PaginationDynamic/PaginationDynamic';
 import { Container } from '@material-ui/core';
 import { useRouter } from 'next/router';
+import { SeoWrapper } from '../../components/shared/SeoWrapper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,38 +56,40 @@ export default function Hospitals() {
     setPageValue(value);
   };
   return (
-    <MainLayout>
-      <div className={classes.root}>
-        <Paper className={classes.mapContainer} variant="outlined" square>
-          {!loading && data.allHospitals.length > 0 && <HospitalMapBox hospitalDatas={data.allHospitals} />}
-        </Paper>
-        <Container maxWidth="lg">
-          <Grid className={classes.gridContainer} container spacing={3}>
-            <Grid item xs={12} md={4} sm={12}>
-              <Grid container spacing={4}>
-                <HospitalFilter />
+    <SeoWrapper title="Covid Beds | Hospitals" canonicalPath={`/hospitals/${hospitalSearch}`}>
+      <MainLayout>
+        <div className={classes.root}>
+          <Paper className={classes.mapContainer} variant="outlined" square>
+            {!loading && data.allHospitals.length > 0 && <HospitalMapBox hospitalDatas={data.allHospitals} />}
+          </Paper>
+          <Container maxWidth="lg">
+            <Grid className={classes.gridContainer} container spacing={3}>
+              <Grid item xs={12} md={4} sm={12}>
+                <Grid container spacing={4}>
+                  <HospitalFilter />
+                </Grid>
+              </Grid>
+              <Grid item xs={12} md={8} sm={12}>
+                <Grid container spacing={4}>
+                  <>
+                    {!loading &&
+                      data.allHospitals.map((hospital: IcreateHospital) => {
+                        return <HospitalCard key={hospital.id} hospitalDetail={hospital} />;
+                      })}
+                    {!loading && data.count > 5 && (
+                      <PaginationDynamic
+                        page={pageValue}
+                        handleNextPage={handleChange}
+                        count={Math.ceil(data.count / 5)}
+                      />
+                    )}
+                  </>
+                </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={8} sm={12}>
-              <Grid container spacing={4}>
-                <>
-                  {!loading &&
-                    data.allHospitals.map((hospital: IcreateHospital) => {
-                      return <HospitalCard key={hospital.id} hospitalDetail={hospital} />;
-                    })}
-                  {!loading && data.count > 5 && (
-                    <PaginationDynamic
-                      page={pageValue}
-                      handleNextPage={handleChange}
-                      count={Math.ceil(data.count / 5)}
-                    />
-                  )}
-                </>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Container>
-      </div>
-    </MainLayout>
+          </Container>
+        </div>
+      </MainLayout>
+    </SeoWrapper>
   );
 }

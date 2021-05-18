@@ -6,14 +6,17 @@ import { ThemeProvider } from '@material-ui/styles';
 import { theme } from '../src/util/theme';
 import '../styles/globals.css';
 import { ToastProvider } from 'react-toast-notifications';
+import { CookiesProvider } from 'react-cookie';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider session={pageProps.session}>
       <ThemeProvider theme={theme}>
-        <ToastProvider autoDismiss autoDismissTimeout={6000}>
-          <Component {...pageProps} />
-        </ToastProvider>
+        <CookiesProvider>
+          <ToastProvider autoDismiss autoDismissTimeout={6000}>
+            <Component {...pageProps} />
+          </ToastProvider>
+        </CookiesProvider>
       </ThemeProvider>
     </Provider>
   );

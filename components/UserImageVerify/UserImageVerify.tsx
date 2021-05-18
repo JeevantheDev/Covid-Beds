@@ -3,12 +3,15 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import Tesseract from 'tesseract.js';
-import BarLoader from 'react-spinners/BarLoader';
-import { Box, Typography } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import { Box, Button, Typography } from '@material-ui/core';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Cancel from '@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
 import { CircularStatic } from '../shared/CircularStatic';
+import { VERIFY_USER_CONDITIONS } from '../../src/entity/constant';
+import Icon from '@material-ui/core/Icon';
+
 interface Iprops {
   handleVerifiedUser: (verifyType: boolean) => void;
 }
@@ -35,24 +38,26 @@ export const UserImageVerify: React.FC<Iprops> = ({ handleVerifiedUser }) => {
 
   const runOcr = () => {
     setOcrText([]);
-    setIsLoading({ progress: 0, isLoading: true });
-    Tesseract.recognize(currentPic, 'eng', {
-      logger: (m) => {
-        if (m.status === 'recognizing text') {
-          setIsLoading({
-            progress: m.progress * 100,
-            isLoading: true,
-          });
-        }
-      },
-    })
-      .then(({ data: { text } }) => {
-        setOcrText((oldarray) => [...oldarray, text]);
-        setIsLoading({ progress: 0, isLoading: false });
+    if (currentPic !== null) {
+      setIsLoading({ progress: 0, isLoading: true });
+      Tesseract.recognize(currentPic, 'eng', {
+        logger: (m) => {
+          if (m.status === 'recognizing text') {
+            setIsLoading({
+              progress: m.progress * 100,
+              isLoading: true,
+            });
+          }
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then(({ data: { text } }) => {
+          setOcrText((oldarray) => [...oldarray, text]);
+          setIsLoading({ progress: 0, isLoading: false });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -106,21 +111,70 @@ export const UserImageVerify: React.FC<Iprops> = ({ handleVerifiedUser }) => {
           <img src={src} alt={alt} className="img-preview" />
         </Box>
         <div className="ocr-button" onClick={runOcr}>
-          Verify your ID
+          {isLoading ? 'Verifying...' : 'Verify your ID'}
         </div>
       </Box>
 
-      <Box
-        mb={3}
-        ml={3}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        style={{ backgroundColor: '#ccc', width: '100%', height: '50%' }}
-      >
-        {ocrText.length > 0 && <Typography color="textPrimary">{ocrText[0]}</Typography>}
-        {/* <BarLoader color="#3f4257" loading={isLoading} width={100} /> */}
-        {progress > 0 && <CircularStatic progressValue={progress} />}
+      <Box mb={3} ml={3} p={3} style={{ width: '100%', height: '50%' }}>
+        <Typography
+          style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
+          variant="h4"
+          component="span"
+          color="textPrimary"
+          gutterBottom
+        >
+          Verify using your
+          <Typography
+            style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
+            variant="h4"
+            component="span"
+            color="secondary"
+            gutterBottom
+          >
+            {' '}
+            Medical Photo ID.
+          </Typography>
+        </Typography>
+        <Divider style={{ width: '90%' }} />
+        <Box mt={2} mb={2}>
+          <Typography variant="h6" gutterBottom>
+            Note:
+          </Typography>
+          <Typography variant="overline" gutterBottom>
+            <ul>
+              {[VERIFY_USER_CONDITIONS.NOTE1, VERIFY_USER_CONDITIONS.NOTE2, VERIFY_USER_CONDITIONS.NOTE3].map(
+                (note: string) => (
+                  <li key={note}>{note}</li>
+                )
+              )}
+            </ul>
+          </Typography>
+          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+            {progress > 0 && <CircularStatic progressValue={progress} />}
+            {ocrText.length > 0 && ocrText[0].toUpperCase().includes('MEDICAL STAFF', 'HOSPITAL') && (
+              <>
+                <Icon style={{ color: '#28A745' }} className="fas fa-check-circle fa-4x" />
+                <Button
+                  onClick={() => handleVerifiedUser(true)}
+                  style={{ margin: 20 }}
+                  size="large"
+                  color="primary"
+                  variant="contained"
+                >
+                  Proceed to Join with us
+                </Button>
+              </>
+            )}
+            {ocrText.length > 0 && !ocrText[0].toUpperCase().includes('MEDICAL STAFF', 'HOSPITAL') && (
+              <>
+                <Icon style={{ color: 'red' }} className="fas fa-times-circle fa-4x" />
+                <Typography style={{ margin: 20 }} variant="h6" gutterBottom>
+                  Sorry!! Please verified with a valid ID.
+                </Typography>
+              </>
+            )}
+          </Box>
+        </Box>
       </Box>
     </div>
   );

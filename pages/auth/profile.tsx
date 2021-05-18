@@ -8,6 +8,8 @@ import { HospitalDetails } from '../../components/HospitalDetails/HospitalDetail
 import { AccountDetails } from '../../components/AccountDetails/AccountDetails';
 import { getSession } from 'next-auth/client';
 import useRequest from '../../src/actions/index';
+import { Redirect } from '../../src/actions/Redirect';
+import { SeoWrapper } from '../../components/shared/SeoWrapper';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,16 +25,23 @@ const useStyles = makeStyles((theme: Theme) =>
 const profile = ({ session }) => {
   const classes = useStyles();
   const { data, loading, mutate } = useRequest(session && { url: `/api/user/${session.user.email}` }, null);
-  return (
-    <MainLayout isContainer>
-      <div className={classes.root}>
-        <Grid container spacing={2}>
-          <AccountDetails loading={loading} userDetails={data} />
-          <HospitalDetails mutate={mutate} loading={loading} userDetails={data} />
-        </Grid>
-      </div>
-    </MainLayout>
-  );
+
+  if (!session) {
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <SeoWrapper title="Covid Beds | Profile" canonicalPath="/auth/profile">
+        <MainLayout isContainer>
+          <div className={classes.root}>
+            <Grid container spacing={2}>
+              <AccountDetails loading={loading} userDetails={data} />
+              <HospitalDetails mutate={mutate} loading={loading} userDetails={data} />
+            </Grid>
+          </div>
+        </MainLayout>
+      </SeoWrapper>
+    );
+  }
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
