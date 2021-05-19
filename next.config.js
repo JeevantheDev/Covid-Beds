@@ -16,5 +16,6 @@ module.exports = {
     GEOCODER_API_KEY: process.env.GEOCODER_API_KEY,
     MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
     REACT_APP_COVID_TRACKER_HOST: process.env.REACT_APP_COVID_TRACKER_HOST,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
 };
