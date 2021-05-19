@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
-const withPWA = require('next-pwa');
 
-module.exports = withPWA({
+module.exports = {
   env: {
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET,
@@ -18,7 +17,4 @@ module.exports = withPWA({
     MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
     REACT_APP_COVID_TRACKER_HOST: process.env.REACT_APP_COVID_TRACKER_HOST,
   },
-  pwa: {
-    dest: 'public',
-  },
-});
+};

@@ -3,48 +3,53 @@ import { IcreateHospital, IcreateHospitalBeds } from '../../src/entity/reqParam'
 
 export const seedersHospitalBeds: IcreateHospitalBeds[] = [
   {
-    hospitalId: 5,
+    hospitalId: 1,
     totalBeds: 900,
     currentBeds: 600,
   },
   {
-    hospitalId: 6,
+    hospitalId: 2,
     totalBeds: 800,
     currentBeds: 200,
   },
   {
-    hospitalId: 7,
+    hospitalId: 3,
     totalBeds: 500,
     currentBeds: 400,
   },
   {
-    hospitalId: 8,
+    hospitalId: 4,
     totalBeds: 1200,
     currentBeds: 400,
   },
   {
-    hospitalId: 9,
+    hospitalId: 5,
     totalBeds: 1500,
     currentBeds: 1000,
   },
   {
-    hospitalId: 10,
+    hospitalId: 6,
     totalBeds: 3500,
     currentBeds: 1900,
   },
   {
-    hospitalId: 11,
+    hospitalId: 7,
     totalBeds: 300,
     currentBeds: 100,
   },
   {
-    hospitalId: 12,
+    hospitalId: 8,
     totalBeds: 1500,
     currentBeds: 600,
   },
   {
-    hospitalId: 13,
+    hospitalId: 9,
     totalBeds: 500,
+    currentBeds: 50,
+  },
+  {
+    hospitalId: 10,
+    totalBeds: 1500,
     currentBeds: 50,
   },
 ];
@@ -76,7 +81,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'devis@covid.co',
     hospitalContactNo: '7748965200',
     hospitalImage: defaultHospitalImage[1],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Hezio COVID Care',
@@ -86,7 +91,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Hezio@covid.co',
     hospitalContactNo: '7748995200',
     hospitalImage: defaultHospitalImage[2],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Bexico COVID Care',
@@ -96,7 +101,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Bexico@covid.co',
     hospitalContactNo: '7748795200',
     hospitalImage: defaultHospitalImage[3],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Huzeis COVID Care',
@@ -106,7 +111,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Huzeis@covid.co',
     hospitalContactNo: '01289 308877',
     hospitalImage: defaultHospitalImage[4],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Naskri COVID Care',
@@ -116,7 +121,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Naskri@covid.co',
     hospitalContactNo: '01925 630897',
     hospitalImage: defaultHospitalImage[5],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Kenryasu COVID Care',
@@ -126,7 +131,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Kenryasu@covid.co',
     hospitalContactNo: '403-762-0354',
     hospitalImage: defaultHospitalImage[6],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Gizenri COVID Care',
@@ -136,7 +141,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Gizenri@covid.co',
     hospitalContactNo: '403-572-3268',
     hospitalImage: defaultHospitalImage[7],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Sezyui COVID Care',
@@ -146,7 +151,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Sezyui@covid.co',
     hospitalContactNo: '0409 961 823',
     hospitalImage: defaultHospitalImage[8],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Henryuiz COVID Care',
@@ -156,7 +161,7 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Henryuiz@covid.co',
     hospitalContactNo: '(03) 9735 0465',
     hospitalImage: defaultHospitalImage[9],
-    userId: 2,
+    userId: 1,
   },
   {
     nameHospital: 'Karrenrez COVID Care',
@@ -166,6 +171,6 @@ export const seedersHospital: IcreateHospital[] = [
     hospitalEmail: 'Karrenrez@covid.co',
     hospitalContactNo: '(03) 5257 1688',
     hospitalImage: defaultHospitalImage[10],
-    userId: 2,
+    userId: 1,
   },
 ];

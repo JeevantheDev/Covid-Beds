@@ -10,7 +10,7 @@ export const Seeders = () => {
   const [createHospitalBeds]: any = useCreateHospitalBeds();
 
   const onCreateSeederHospital = async () => {
-    await createHospital(seedersHospital[10])
+    await createHospital(seedersHospital[9])
       .then(({ status, message }) => {
         if (status === 'success') {
           addToast(message, {
@@ -27,7 +27,7 @@ export const Seeders = () => {
       });
   };
   const onCreateSeederHospitalBeds = async () => {
-    await createHospitalBeds(seedersHospitalBeds[0])
+    await createHospitalBeds(seedersHospitalBeds[9])
       .then(({ status, message }) => {
         if (status === 'success') {
           addToast(message, {

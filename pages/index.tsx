@@ -89,6 +89,7 @@ export default function Home() {
                       style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                     >
                       <LandingPageForm handleClickSearch={onSearchSubmit} />
+                      {/* <Seeders /> */}
                     </div>
                   </Box>
                 </Box>

@@ -1,5 +1,5 @@
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url = "***"
 }
 
@@ -16,8 +16,8 @@ model Hospital {
   locationCoordinates       String           
   locationFormattedAddress  String
   locationCity              String            
-  locationState             String  @unique          
-  locationZipcode           String  @unique          
+  locationState             String            
+  locationZipcode           String            
   locationCountryCode       String            
   hospitalType              String            
   hospitalEmail             String   @unique 

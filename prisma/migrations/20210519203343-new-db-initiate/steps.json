@@ -12,7 +12,7 @@
         "source": "db"
       },
       "argument": "provider",
-      "value": "\"sqlite\""
+      "value": "\"mysql\""
     },
     {
       "tag": "CreateArgument",
@@ -166,33 +166,11 @@
       "arity": "Required"
     },
     {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Hospital",
-          "field": "locationState"
-        },
-        "directive": "unique"
-      }
-    },
-    {
       "tag": "CreateField",
       "model": "Hospital",
       "field": "locationZipcode",
       "type": "String",
       "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Hospital",
-          "field": "locationZipcode"
-        },
-        "directive": "unique"
-      }
     },
     {
       "tag": "CreateField",
