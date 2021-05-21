@@ -36,7 +36,7 @@ export default function HospitalById({ hospitalDetails }: Props) {
     <SeoWrapper
       title={`Covid Beds | ${currentHospital.nameHospital}`}
       metaDescription={currentHospital.locationFormattedAddress}
-      ogImage={currentHospital.hospitalImage.split('public/')[1]}
+      ogImage={currentHospital.hospitalImage}
       canonicalPath={`/hospital/${currentHospital.id}`}
     >
       <MainLayout>

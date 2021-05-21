@@ -106,3 +106,9 @@ a {
   font-size: 20px;
   font-weight: 400;
 }
+
+@media (max-width: 768px) and (min-width: 300px) {
+  .centered {
+    flex-direction: column;
+  }
+}

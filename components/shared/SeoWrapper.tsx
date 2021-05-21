@@ -30,7 +30,13 @@ export const SeoWrapper: React.FC<Iprops> = ({
         <meta property="og:url" key="og:url" content={`${process.env.NEXTAUTH_URL}${router.asPath}`} />
         <meta property="og:type" key="og:type" content="website" />
         <meta property="og:description" key="og:description" content={metaDescription} />
-        <meta property="og:image" key="og:image" content={`${process.env.NEXTAUTH_URL}/${ogImage}`} />
+        <meta
+          property="og:image"
+          key="og:image"
+          content={
+            ogImage.includes('public/uploads/') ? `${process.env.NEXTAUTH_URL}/${ogImage.split('public/')[1]}` : ogImage
+          }
+        />
         <link rel="canonical" href={`${process.env.NEXTAUTH_URL}${canonicalPath ? canonicalPath : router.asPath}`} />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap"
