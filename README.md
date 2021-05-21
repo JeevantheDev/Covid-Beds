@@ -43,9 +43,9 @@ First, install all the required modules:
 npm install
 ```
 
-`Note- Make sure you have install eslint and prettier extension for better coding experience.`
+`Note- Make sure you have also installed eslint and prettier extension for better coding experience.`
 
-Second create a file named as `dev.db` inside `prisma` folder and edit inside `prisma/schema.prisma` file as mentioned in below
+Second create a file named as `dev.db` inside `prisma` folder and edit inside `prisma/schema.prisma` file as mentioned below
 
 ```bash
 datasource db {
@@ -53,7 +53,7 @@ datasource db {
   url      = "file:./dev.db
 ```
 
-Then create an `.env.development.local` file in the root of the `project`.
+Then create a `.env.development.local` file in the root of the `project`.
 
 ```bash
 CLIENT_ID=***** your google auth client id
@@ -89,6 +89,8 @@ Note -
     |   |   +-- [Next.js based API routes]
     |   +-- [each filename based pages file]
     +-- prisma
+    |   +-- migrations
+    |   +-- dev.db
     |   +-- schema.prisma
     +-- public
     |   +-- [fevicon and image files]
