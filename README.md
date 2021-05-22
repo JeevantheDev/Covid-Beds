@@ -10,7 +10,7 @@
 
 - Landing page of the website contains two main things.
 
-  1. Corona Virus tracker for both country wise an state wise. I have implemented this part using react-microfrontend architecture.
+  1. Corona Virus tracker for both country wise an state wise. I have implemented this part using `react-microfrontend architecture`.
 
   ![React Microfrontend Demo Screenshot](github-demo/microfrontend-demo.png)
 
