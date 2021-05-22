@@ -8,6 +8,16 @@
 
 > Use Case of the project.
 
+- Landing page of the website contains two main things.
+
+  1. Corona Virus tracker for both country wise an state wise. I have implemented this part using react-microfrontend architecture.
+
+  ![React Microfrontend Demo Screenshot](github-demo/microfrontend-demo.png)
+
+  2. Any user can search Covid Cares using their respective location as well.
+
+  ![React Microfrontend Demo Screenshot](github-demo/search.png)
+
 - If you want to join your `hospital` then go to `JOIN US` link, then your `hospital staff` should have a proper `Hospital PhotoID` to verify himself/herself as `valid hospital staff`.
 
 ![Successfully Verify Demo Screenshot](github-demo/verify-demo.png)
