@@ -43,7 +43,7 @@ export const HospitalDetailsMiddle = ({ hospitalBeds }: Props) => {
           </Typography>
           <Divider style={{ width: '100%' }} />
           <Typography variant="h1" component="h2" color="secondary">
-            {hospitalBeds.totalBeds} / {hospitalBeds.currentBeds}
+            {hospitalBeds.currentBeds} / {hospitalBeds.totalBeds}
           </Typography>
           <Box mt={1} style={{ width: '65%' }} display="flex" justifyContent="space-evenly" alignItems="center">
             <Icon color="primary" className="fas fa-share-alt fa-2x" />

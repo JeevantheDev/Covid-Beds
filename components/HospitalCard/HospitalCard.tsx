@@ -126,7 +126,7 @@ export const HospitalCard: React.FC<Iprops> = ({ hospitalDetail }) => {
                 <Typography variant="h6">
                   Beds available{' '}
                   <Typography style={{ fontWeight: 'bold' }} color="secondary" component="span" variant="h5">
-                    {hospitalDetail.HospitalBeds[0].totalBeds} / {hospitalDetail.HospitalBeds[0].currentBeds}
+                    {hospitalDetail.HospitalBeds[0].currentBeds} / {hospitalDetail.HospitalBeds[0].totalBeds}
                   </Typography>
                 </Typography>
               )}

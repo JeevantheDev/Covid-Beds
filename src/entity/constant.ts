@@ -18,12 +18,6 @@ export interface IcurrentUser {
   updatedAt: string;
 }
 
-export interface IqueryUser {
-  email: string;
-  name: string;
-  image: string;
-}
-
 export interface Iprovider {
   callbackUrl: string;
   id: string;
