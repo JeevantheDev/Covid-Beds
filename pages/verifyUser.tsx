@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
-import { MainLayout } from '../components/MainLayout/MainLayout';
+import MainLayout from '../components/MainLayout/MainLayout';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
 import { UserImageVerify } from '../components/UserImageVerify/UserImageVerify';
@@ -11,6 +11,8 @@ import { uuid } from 'uuidv4';
 import { useSession } from 'next-auth/client';
 import { Redirect } from '../src/actions/Redirect';
 import { SeoWrapper } from '../components/shared/SeoWrapper';
+import parseCookies from '../src/actions/parse.cookies';
+import { GetServerSideProps } from 'next';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function VerifyUser() {
+export default function VerifyUser({ reserveCookie }) {
   const classes = useStyles();
   const router = useRouter();
   const [session, loading] = useSession();
@@ -68,7 +70,7 @@ export default function VerifyUser() {
   } else {
     return (
       <SeoWrapper title="Covid Beds | Verify" canonicalPath="/verifyUser">
-        <MainLayout isContainer>
+        <MainLayout cookies={reserveCookie} isContainer>
           <div className={classes.root}>
             <UserImageVerify handleVerifiedUser={handleVerifiedUser} />
           </div>
@@ -77,3 +79,18 @@ export default function VerifyUser() {
     );
   }
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
+  const reserveCookie = parseCookies(req);
+  if (res) {
+    if (Object.keys(reserveCookie).length === 0 && reserveCookie.constructor === Object) {
+      res.writeHead(301, { Location: '/' });
+      res.end();
+    }
+  }
+  return {
+    props: {
+      reserveCookie: reserveCookie && reserveCookie,
+    },
+  };
+};

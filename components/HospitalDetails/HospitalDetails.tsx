@@ -386,13 +386,13 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
                   <Input
                     type="text"
                     disabled
-                    value={`${userDetails.Hospital[0].HospitalBeds[0].totalBeds}/`}
+                    value={`${userDetails.Hospital[0].HospitalBeds[0].currentBeds}/`}
                     className={classes.inputText}
                   />
                   <Input
                     color="primary"
                     type="number"
-                    value={userDetails.Hospital[0].HospitalBeds[0].currentBeds}
+                    value={userDetails.Hospital[0].HospitalBeds[0].totalBeds}
                     className={classes.inputText}
                   />
                 </Box>

@@ -12,7 +12,7 @@ import Icon from '@material-ui/core/Icon';
 import { getProviders, signIn, useSession } from 'next-auth/client';
 import { GetServerSideProps } from 'next';
 import { ProviderTypes, Iprovider } from '../../../src/entity/constant';
-import { MainLayout } from '../../../components/MainLayout/MainLayout';
+import MainLayout from '../../../components/MainLayout/MainLayout';
 import Image from 'next/image';
 import { Redirect } from '../../../src/actions/Redirect';
 import { Icon as IconifyIcon } from '@iconify/react';
@@ -107,7 +107,7 @@ export default function SignIn({ providers, data }: { providers: ProviderTypes; 
   } else {
     return (
       <SeoWrapper title="Covid Beds | Join us" canonicalPath={`/auth/signin/${router.query.signinID}`}>
-        <MainLayout isContainer>
+        <MainLayout cookies={data} isContainer>
           <div className={classes.root}>
             <Paper className={classes.loginContainer} elevation={0}>
               <Grid container spacing={3}>

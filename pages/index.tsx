@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
-import { MainLayout } from '../components/MainLayout/MainLayout';
+import MainLayout from '../components/MainLayout/MainLayout';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -14,6 +14,8 @@ import { useRouter } from 'next/router';
 // import { Seeders } from '../components/shared/Seeders';
 import { SeoWrapper } from '../components/shared/SeoWrapper';
 const { REACT_APP_COVID_TRACKER_HOST: covidTrackerHost } = process.env;
+import parseCookies from '../src/actions/parse.cookies';
+import { GetServerSideProps } from 'next';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +53,7 @@ function CovidTracker() {
   return <MicroFrontend host={covidTrackerHost} name="CovidTracker" />;
 }
 
-export default function Home() {
+export default function Home({ reserveCookie }) {
   const classes = useStyles();
   const router = useRouter();
 
@@ -63,7 +65,7 @@ export default function Home() {
 
   return (
     <SeoWrapper title="Covid Beds | Welcome">
-      <MainLayout isContainer>
+      <MainLayout cookies={reserveCookie} isContainer>
         <div className={classes.root}>
           <Grid container spacing={1}>
             <Grid item xs={12} md={6} sm={12}>
@@ -101,3 +103,18 @@ export default function Home() {
     </SeoWrapper>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
+  const reserveCookie = parseCookies(req);
+  if (res) {
+    if (Object.keys(reserveCookie).length === 0 && reserveCookie.constructor === Object) {
+      res.writeHead(301, { Location: '/' });
+      res.end();
+    }
+  }
+  return {
+    props: {
+      reserveCookie: reserveCookie && reserveCookie,
+    },
+  };
+};

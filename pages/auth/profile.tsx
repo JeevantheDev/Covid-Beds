@@ -2,7 +2,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { MainLayout } from '../../components/MainLayout/MainLayout';
+import MainLayout from '../../components/MainLayout/MainLayout';
 import Grid from '@material-ui/core/Grid';
 import { HospitalDetails } from '../../components/HospitalDetails/HospitalDetails';
 import { AccountDetails } from '../../components/AccountDetails/AccountDetails';
@@ -10,6 +10,7 @@ import { getSession } from 'next-auth/client';
 import useRequest from '../../src/actions/index';
 import { Redirect } from '../../src/actions/Redirect';
 import { SeoWrapper } from '../../components/shared/SeoWrapper';
+import parseCookies from '../../src/actions/parse.cookies';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const profile = ({ session }) => {
+const profile = ({ session, reserveCookie }) => {
   const classes = useStyles();
   const { data, loading, mutate } = useRequest(session && { url: `/api/user/${session.user.email}` }, null);
 
@@ -31,7 +32,7 @@ const profile = ({ session }) => {
   } else {
     return (
       <SeoWrapper title="Covid Beds | Profile" canonicalPath="/auth/profile">
-        <MainLayout isContainer>
+        <MainLayout cookies={reserveCookie} isContainer>
           <div className={classes.root}>
             <Grid container spacing={2}>
               <AccountDetails loading={loading} userDetails={data} />
@@ -45,9 +46,17 @@ const profile = ({ session }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req, res } = context;
   const session = await getSession(context);
+  const reserveCookie = parseCookies(req);
+  if (res) {
+    if (Object.keys(reserveCookie).length === 0 && reserveCookie.constructor === Object) {
+      res.writeHead(301, { Location: '/' });
+      res.end();
+    }
+  }
   return {
-    props: { session },
+    props: { session, reserveCookie: reserveCookie && reserveCookie },
   };
 };
 

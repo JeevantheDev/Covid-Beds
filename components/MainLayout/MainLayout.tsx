@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
@@ -21,9 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
 interface Iprops {
   children?: React.ReactElement;
   isContainer?: boolean;
+  cookies?: any;
 }
 
-export const MainLayout: React.FC<Iprops> = ({ children, isContainer }) => {
+const MainLayout: React.FC<Iprops> = ({ children, isContainer, cookies }) => {
   const classes = useStyles();
   const [session] = useSession();
 
@@ -56,7 +58,7 @@ export const MainLayout: React.FC<Iprops> = ({ children, isContainer }) => {
 
   return (
     <div id="root">
-      <Navbar authenticated={authUser.authenticated} />
+      <Navbar cookies={cookies} authenticated={authUser.authenticated} />
       {isContainer && (
         <Container maxWidth="lg">
           <div className={classes.root} id="react-children">
@@ -68,3 +70,5 @@ export const MainLayout: React.FC<Iprops> = ({ children, isContainer }) => {
     </div>
   );
 };
+
+export default MainLayout;

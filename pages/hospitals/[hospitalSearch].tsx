@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState } from 'react';
-import { MainLayout } from '../../components/MainLayout/MainLayout';
+import MainLayout from '../../components/MainLayout/MainLayout';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -14,6 +15,9 @@ import { PaginationDynamic } from '../../components/PaginationDynamic/Pagination
 import { Container } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { SeoWrapper } from '../../components/shared/SeoWrapper';
+import parseCookies from '../../src/actions/parse.cookies';
+import { GetServerSideProps } from 'next';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,10 +45,17 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       height: '100%',
     },
+    skeletonContainer: {
+      width: '100%',
+      height: theme.spacing(22),
+      [(theme.breakpoints.down('sm'), theme.breakpoints.down('md'))]: {
+        height: '100%',
+      },
+    },
   })
 );
 
-export default function Hospitals() {
+export default function Hospitals({ reserveCookie }) {
   const classes = useStyles();
   const router = useRouter();
   const { hospitalSearch } = router.query;
@@ -57,10 +68,11 @@ export default function Hospitals() {
   };
   return (
     <SeoWrapper title="Covid Beds | Hospitals" canonicalPath={`/hospitals/${hospitalSearch}`}>
-      <MainLayout>
+      <MainLayout cookies={reserveCookie}>
         <div className={classes.root}>
           <Paper className={classes.mapContainer} variant="outlined" square>
             {!loading && data.allHospitals.length > 0 && <HospitalMapBox hospitalDatas={data.allHospitals} />}
+            {loading && <Skeleton animation="wave" variant="rect" style={{ width: '100%', height: '100%' }} />}
           </Paper>
           <Container maxWidth="lg">
             <Grid className={classes.gridContainer} container spacing={3}>
@@ -75,6 +87,16 @@ export default function Hospitals() {
                     {!loading &&
                       data.allHospitals.map((hospital: IcreateHospital) => {
                         return <HospitalCard key={hospital.id} hospitalDetail={hospital} />;
+                      })}
+                    {loading &&
+                      [1, 2, 3, 4, 5].map((n: number) => {
+                        return (
+                          <Grid key={n} item xs={12} md={12} sm={6}>
+                            <Paper className={classes.skeletonContainer} variant="outlined">
+                              <Skeleton animation="wave" variant="rect" style={{ width: '100%', height: '100%' }} />
+                            </Paper>
+                          </Grid>
+                        );
                       })}
                     {!loading && data.count > 5 && (
                       <PaginationDynamic
@@ -93,3 +115,18 @@ export default function Hospitals() {
     </SeoWrapper>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
+  const reserveCookie = parseCookies(req);
+  if (res) {
+    if (Object.keys(reserveCookie).length === 0 && reserveCookie.constructor === Object) {
+      res.writeHead(301, { Location: '/' });
+      res.end();
+    }
+  }
+  return {
+    props: {
+      reserveCookie: reserveCookie && reserveCookie,
+    },
+  };
+};

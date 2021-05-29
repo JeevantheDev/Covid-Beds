@@ -4,6 +4,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import type { NextApiRequest, NextApiResponse } from 'next';
 import formidable from 'formidable';
+import Cors from 'cors';
+
+// Initializing the cors middleware
+const cors = Cors({
+  methods: ['GET', 'POST', 'HEAD'],
+});
 
 export const config = {
   api: {
@@ -11,8 +17,24 @@ export const config = {
   },
 };
 
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+
+      return resolve(result);
+    });
+  });
+}
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   let response: any;
+  // Run the middleware
+  await runMiddleware(req, res, cors);
   const form = new formidable.IncomingForm();
   form.uploadDir = './public/uploads';
   form.keepExtensions = true;

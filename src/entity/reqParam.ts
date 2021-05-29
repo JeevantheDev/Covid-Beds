@@ -30,3 +30,14 @@ export interface IcreateHospitalBeds {
   createdAt?: Date | string;
   updatedAt?: Date | string;
 }
+
+export interface IcreateReserveBed {
+  patientGenerateID?: string;
+  hospitalDetails?: IcreateHospital;
+  hospitalName?: string;
+  bedReserve?: 1;
+  arrivalTime: string;
+  userPhoneNumber?: string;
+  createdAt?: Date | string;
+  bedExpires?: boolean;
+}
