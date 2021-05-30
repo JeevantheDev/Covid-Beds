@@ -3,7 +3,6 @@
 
 import { PrismaClient, PrismaClientValidationError } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { HOSPITAL_DEFAULT } from '../../../src/entity/constant';
 import { geocoder } from '../../../src/util/geocoder';
 
 const prisma = new PrismaClient();

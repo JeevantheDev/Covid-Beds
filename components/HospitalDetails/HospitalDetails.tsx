@@ -27,6 +27,7 @@ import {
 } from '../../src/actions/hospital';
 import Chip from '@material-ui/core/Chip';
 import { useToasts } from 'react-toast-notifications';
+import { HOSPITAL_DEFAULT } from '../../src/entity/constant';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -208,6 +209,7 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
   const handleSubmitHospital = async (values?: IcreateHospital) => {
     if (!editFlag) {
       values.userId = userDetails.id;
+      values.hospitalImage = HOSPITAL_DEFAULT.IMAGE;
       await createHospital(values)
         .then(({ createdHospital, status, message }) => {
           setInitialHospitalBedsFormData({
@@ -518,14 +520,24 @@ export const HospitalDetails: React.FC<IHospitalProps> = ({ userDetails, loading
         <Paper className={classes.cardHospital} variant="outlined">
           {userDetails && userDetails.Hospital.length > 0 && !loading && (
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              <Image
-                loading="eager"
-                objectFit="cover"
-                src={`/uploads/${userDetails.Hospital[0].hospitalImage.split('public/uploads/')[1]}`}
-                width="155"
-                height="155"
-                className={classes.cardHospitalImg}
-              />
+              {userDetails.Hospital[0].hospitalImage.includes('public/upload') && (
+                <Image
+                  loading="eager"
+                  objectFit="cover"
+                  src={`/uploads/${userDetails.Hospital[0].hospitalImage.split('public/uploads/')[1]}`}
+                  width="155"
+                  height="155"
+                  className={classes.cardHospitalImg}
+                />
+              )}
+              {!userDetails.Hospital[0].hospitalImage.includes('public/upload') && (
+                <img
+                  className={classes.cardHospitalImg}
+                  width="200"
+                  height="175"
+                  src={userDetails.Hospital[0].hospitalImage}
+                />
+              )}
               <input
                 onChange={handleChangeImage}
                 accept="image/*"
