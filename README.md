@@ -28,7 +28,7 @@ If the user is not verified successfully then he/she can not proceed to register
 
 `Note: For Join Us link usecase I have uploaded two image files named as doctor-id.png and not-doctor-id.jpg inside github-demo folder.`
 
-After successfully login you can go to your profile page for register your hospita details.
+After successfully login you can go to your profile page for register your hospital details.
 
 ![Profile Demo Screenshot](github-demo/profile.png)
 
