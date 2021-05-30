@@ -107,6 +107,12 @@ a {
   font-weight: 400;
 }
 
+.mapContainer {
+  width: 100%;
+  height: 50%;
+  background-color: black;
+}
+
 @media (max-width: 768px) and (min-width: 300px) {
   .centered {
     flex-direction: column;

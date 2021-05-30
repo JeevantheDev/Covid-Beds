@@ -202,7 +202,7 @@ export const Navbar = (props: Props) => {
                           <Typography variant="h6">Note: </Typography>
                           <Typography variant="overline" gutterBottom>
                             <ul>
-                              <li>Ticket will be expire after 1hr of your Arrival time.</li>
+                              <li>Ticket will be expire after your arrival time.</li>
                               <li>Another ticket can be create after expiry of current ticket.</li>
                             </ul>
                           </Typography>

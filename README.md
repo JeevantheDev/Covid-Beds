@@ -32,9 +32,34 @@ After successfully login you can go to your profile page for register your hospi
 
 ![Profile Demo Screenshot](github-demo/profile.png)
 
-Then you can add or update your details according to your use case.
+> Then you can add or update your details according to your use case.
+
+- If you want to browse all the hospitals or search by your location then you can proceed with `BROWSE` link.
+
+![All Hospitals Screenshot](github-demo/allHospitals.png)
 
 - For other pages you can visit this link [https://covid-beds.vercel.app/](https://covid-beds.vercel.app/) as well.
+
+- If you want to `reserve` a bed in any of the hospital then click on any `hospital link` for more details.
+
+![Hospital Details Screenshot](github-demo/hospitalById.png)
+
+Then click on the `RESERVE A BED` button for proceed further.
+
+![OTP Verify Screenshot](github-demo/otpVerify.png)
+
+Make sure you should verify your phone number using your `OTP` code successfully.
+AFter verified successfully you will be redirect to your previous page and then give your `Patient Arrival` time appropriately.
+
+`Note: Your patient arrival time interval must be 45mins to 1hr from current time.`
+
+![Reserve Bed Screenshot](github-demo/reserveBed.png)
+
+AFter successfully reserve a bed you can see your ticket like this. (If its not available then refresh your browser.)
+
+![Reserve Bed Ticket Screenshot](github-demo/reserveBedTicket.png)
+
+`Note: This is a one side ticket generating. One user can create only one tiket at a time and after 1 hr the ticket will be automatically remove from user browser as well.`
 
 ## 2. Tech Stack:
 
@@ -60,10 +85,12 @@ Second create a file named as `dev.db` inside `prisma` folder and edit inside `p
 ```bash
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db
+  url      = "file:./dev.db"
 ```
 
 Then create a `.env.development.local` file in the root of the `project`.
+
+` I have also added all the required API keys inside .env.development.local file.`
 
 ```bash
 CLIENT_ID=***** your google auth client id
@@ -73,6 +100,7 @@ AUTH0_CLIENT_SECRET=***** your auth0 client secret
 AUTH0_DOMAIN=***** your auth0 client secret
 APP_ID=***** your facebook app id
 APP_SECRET=***** your facebook app secret
+SAWO_API=***** your sawo api project.
 SECRET=any name as your wish
 NEXTAUTH_URL=http://localhost:3000
 GEOCODER_PROVIDER=mapquest
