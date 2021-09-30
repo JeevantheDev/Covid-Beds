@@ -13,7 +13,6 @@ import AddIcon from '@material-ui/icons/Add';
 import { HospitalReserveBedForm } from '../modal/HospitalReserveBedForm/HospitalReserveBedForm';
 import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
-import isIncognito from '../../src/util/detectIncognito';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,16 +85,6 @@ export const HospitalDetailsUpper = ({ hospitalDetails, cookies }: Props) => {
     bedReserve: 1,
     bedExpires: false,
   });
-
-  useEffect(() => {
-    isIncognito(function (itIs) {
-      if (itIs) {
-        setIsBrowserPrivate(true);
-      } else {
-        setIsBrowserPrivate(false);
-      }
-    });
-  }, []);
 
   const handleOpenReserveForm = () => {
     if (!isBrowerPrivate) {

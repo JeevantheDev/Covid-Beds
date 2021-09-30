@@ -4,6 +4,7 @@
 /**
  * @param callback Anonymous function executed when the availability of the incognito mode has been checked.
  */
+// Incognito check
 export default function isIncognito(callback) {
   var fs = window.RequestFileSystem || window.webkitRequestFileSystem;
 
